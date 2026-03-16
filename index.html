@@ -2241,8 +2241,8 @@ footer h2 {
     // When pagesRead is edited directly, update the target baseline so
     // recalculation picks up the new value (reading progress via logPages
     // does NOT update the baseline)
-    if (field === 'pagesRead' && val != null) {
-      targetBaseline[books[idx].title] = val;
+    if (field === 'pagesRead') {
+      targetBaseline[books[idx].title] = val ?? 0;
       saveBaseline();
     }
     saveBooks();

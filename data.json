@@ -80,7 +80,7 @@
     {
       "title": "Lolita",
       "author": "Vladimir Nabokov",
-      "pagesRead": null,
+      "pagesRead": 0,
       "totalPages": 317,
       "difficulty": 6,
       "estimatedPages": true
@@ -209,7 +209,7 @@
     "The Patterning Instinct": 130,
     "The Name of the Rose": 0,
     "Caliban and the Witch": 0,
-    "Lolita": 200,
+    "Lolita": 0,
     "She Comes First": 0,
     "The Mountains Sing": 0,
     "9 Out of 10 Climbers Make the Same Mistakes": 0,
