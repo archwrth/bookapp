@@ -3,77 +3,77 @@
     {
       "title": "Nausea",
       "author": "Jean-Paul Sartre",
-      "pagesRead": 138,
+      "pagesRead": 38,
       "totalPages": 138,
       "difficulty": 6
     },
     {
       "title": "The Soundscape",
       "author": "R. Murray Schafer",
-      "pagesRead": 264,
+      "pagesRead": 14,
       "totalPages": 264,
       "difficulty": 7
     },
     {
       "title": "Psychotherapy East & West",
       "author": "Alan W. Watts",
-      "pagesRead": 205,
+      "pagesRead": 55,
       "totalPages": 205,
       "difficulty": 7
     },
     {
       "title": "Ghosts of My Life",
       "author": "Mark Fisher",
-      "pagesRead": 267,
+      "pagesRead": 17,
       "totalPages": 267,
       "difficulty": 6
     },
     {
       "title": "The Birth of Tragedy",
       "author": "Friedrich Nietzsche",
-      "pagesRead": 142,
+      "pagesRead": 0,
       "totalPages": 142,
       "difficulty": 9
     },
     {
       "title": "Fear and Trembling",
       "author": "Søren Kierkegaard",
-      "pagesRead": 141,
+      "pagesRead": 0,
       "totalPages": 141,
       "difficulty": 8
     },
     {
       "title": "Wherever You Go, There You Are",
       "author": "Jon Kabat-Zinn",
-      "pagesRead": 299,
+      "pagesRead": 0,
       "totalPages": 299,
       "difficulty": 3
     },
     {
       "title": "Oneness vs The 1%",
       "author": "Vandana Shiva",
-      "pagesRead": 173,
+      "pagesRead": 0,
       "totalPages": 173,
       "difficulty": 5
     },
     {
       "title": "The Patterning Instinct",
       "author": "Jeremy Lent",
-      "pagesRead": 430,
+      "pagesRead": 130,
       "totalPages": 430,
       "difficulty": 6
     },
     {
       "title": "The Name of the Rose",
       "author": "Umberto Eco",
-      "pagesRead": 576,
+      "pagesRead": 0,
       "totalPages": 576,
       "difficulty": 7
     },
     {
       "title": "Caliban and the Witch",
       "author": "Silvia Federici",
-      "pagesRead": 50,
+      "pagesRead": 0,
       "totalPages": 268,
       "difficulty": 7
     },
@@ -151,256 +151,5 @@
     16,
     17
   ],
-  "readingLog": [
-    {
-      "date": "2026-03-16",
-      "title": "Nausea",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Nausea",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Psychotherapy East & West",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Psychotherapy East & West",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Psychotherapy East & West",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Ghosts of My Life",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Ghosts of My Life",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Ghosts of My Life",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Ghosts of My Life",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Ghosts of My Life",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Birth of Tragedy",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Birth of Tragedy",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Birth of Tragedy",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Fear and Trembling",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Fear and Trembling",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Fear and Trembling",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Wherever You Go, There You Are",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Wherever You Go, There You Are",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Wherever You Go, There You Are",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Wherever You Go, There You Are",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Wherever You Go, There You Are",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Wherever You Go, There You Are",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Oneness vs The 1%",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Oneness vs The 1%",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Oneness vs The 1%",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Oneness vs The 1%",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Patterning Instinct",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Patterning Instinct",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Patterning Instinct",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Patterning Instinct",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Patterning Instinct",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Patterning Instinct",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Name of the Rose",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Caliban and the Witch",
-      "pages": 50
-    }
-  ]
+  "readingLog": []
 }
