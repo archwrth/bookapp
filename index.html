@@ -1923,10 +1923,13 @@ footer h2 {
           </div>
           ${target ? `<div class="rn-target">Today's target: ${target} pages${todayPages > 0 ? ` (done: ${todayPages})` : ''}</div>` : ''}
           <div class="rn-quick-btns">
+            <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="1">+1</button>
+            <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="2">+2</button>
             <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="5">+5</button>
             <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="10">+10</button>
             <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="25">+25</button>
             <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="50">+50</button>
+            ${target ? `<button class="pixel-btn small green" data-rn-idx="${index}" data-pages="${target}">+${target} ★</button>` : ''}
             <button class="pixel-btn small" data-rn-idx="${index}" data-pages="custom">pg#</button>
           </div>
           ${nextBook ? `<div class="queue-badge">UP NEXT: ${escapeHtml(nextBook.book.title)}</div>` : ''}
