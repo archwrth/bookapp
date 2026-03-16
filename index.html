@@ -1702,17 +1702,24 @@ footer h2 {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
+    // Pages logged = total progress made via the log (not pre-existing)
+    const pagesLogged = readingLog.reduce((s, e) => s + e.pages, 0);
+    // Pages remaining at the point logging started
+    const pagesAtStart = totalRead - pagesLogged;
+    const remainingAtStart = totalPages - pagesAtStart;
+
     // Start date = first log entry
     const sortedDates = readingLog.map(e => e.date).sort();
     const startDate = new Date(sortedDates[0] + 'T00:00:00');
     const totalDays = Math.ceil((DEADLINE - startDate) / 86400000);
     const elapsed = Math.max(0, Math.ceil((today - startDate) / 86400000));
-    if (totalDays <= 0) return null;
+    if (totalDays <= 0 || remainingAtStart <= 0) return null;
 
-    const expectedByNow = Math.round((elapsed / totalDays) * totalPages);
-    const delta = totalRead - expectedByNow;
+    // Expected logged pages by now (linear over remaining pages from start)
+    const expectedLogged = Math.round((elapsed / totalDays) * remainingAtStart);
+    const delta = pagesLogged - expectedLogged;
 
-    return { delta, expectedByNow, totalRead };
+    return { delta, expectedByNow: pagesAtStart + expectedLogged, totalRead };
   }
 
   // --- Rendering ---
