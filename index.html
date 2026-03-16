@@ -3,38 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bookdex 2026</title>
+<title>Reading Quest 2026</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect x='2' y='2' width='12' height='12' fill='%23f6c90e' rx='1'/><rect x='3' y='3' width='10' height='10' fill='%2316213e'/><rect x='4' y='4' width='3' height='8' fill='%234ecca3'/><rect x='7' y='4' width='1' height='8' fill='%23e2e2e2'/><rect x='8' y='4' width='4' height='8' fill='%234ecca3'/><rect x='5' y='5' width='1' height='1' fill='%2316213e'/><rect x='5' y='7' width='1' height='1' fill='%2316213e'/><rect x='9' y='5' width='2' height='1' fill='%2316213e'/><rect x='9' y='7' width='2' height='1' fill='%2316213e'/><rect x='9' y='9' width='2' height='1' fill='%2316213e'/></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0c0c18;
-  --card-bg: #1a1a30;
-  --card-bg-hover: #222244;
-  --border: #3a4a6a;
-  --border-bright: #5a7aaa;
-  --fire: #ff6b35;
-  --fire-dark: #cc4400;
-  --gold: #ffd700;
-  --gold-dark: #b8960f;
-  --green: #3dd68c;
-  --green-dark: #22a366;
-  --red: #ff3b3b;
-  --electric: #ffcc00;
-  --steel: #6a8caf;
-  --dragon: #7b68ee;
-  --text: #e8e8f0;
-  --text-dim: #6a6a8a;
+  --bg: #0a1a12;
+  --card-bg: #0f251a;
+  --card-bg-hover: #163324;
+  --border: #2a5a3a;
+  --border-bright: #3a8a5a;
+  --gold: #f0c040;
+  --gold-dark: #c09820;
+  --green: #44dd88;
+  --green-dark: #22aa55;
+  --red: #e85050;
+  --sky: #44aaee;
+  --sunset: #ee7744;
+  --berry: #dd5599;
+  --text: #e8f0e8;
+  --text-dim: #6a9a7a;
   --pixel-size: 3px;
 }
 
 body {
   background: var(--bg);
   background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(255,107,53,0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(123,104,238,0.06) 0%, transparent 50%);
+    radial-gradient(ellipse at 15% 0%, rgba(68,170,238,0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 0%, rgba(238,119,68,0.06) 0%, transparent 35%),
+    radial-gradient(ellipse at 50% 100%, rgba(68,221,136,0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 0% 60%, rgba(221,85,153,0.04) 0%, transparent 30%);
   color: var(--text);
   font-family: 'Courier New', monospace;
   font-size: 14px;
@@ -67,8 +67,8 @@ header {
 header h1 {
   font-family: 'Press Start 2P', monospace;
   font-size: clamp(14px, 4vw, 24px);
-  color: var(--fire);
-  text-shadow: 3px 3px 0 var(--fire-dark), 0 0 20px rgba(255,107,53,0.3);
+  color: var(--gold);
+  text-shadow: 3px 3px 0 var(--gold-dark), 0 0 20px rgba(240,192,64,0.25);
   margin-bottom: 20px;
   letter-spacing: 2px;
 }
@@ -94,7 +94,7 @@ header h1 {
 .stat-box .stat-label {
   font-family: 'Press Start 2P', monospace;
   font-size: 7px;
-  color: var(--steel);
+  color: var(--text-dim);
   margin-bottom: 6px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -104,7 +104,7 @@ header h1 {
   font-family: 'Press Start 2P', monospace;
   font-size: 14px;
   color: var(--gold);
-  text-shadow: 0 0 8px rgba(255,215,0,0.3);
+  text-shadow: 0 0 8px rgba(240,192,64,0.25);
 }
 
 .overall-progress {
@@ -116,7 +116,7 @@ header h1 {
 .overall-progress .progress-label {
   font-family: 'Press Start 2P', monospace;
   font-size: 7px;
-  color: var(--steel);
+  color: var(--text-dim);
   margin-bottom: 6px;
   letter-spacing: 1px;
 }
@@ -133,11 +133,11 @@ header h1 {
 
 .progress-bar-inner {
   height: 100%;
-  background: linear-gradient(90deg, var(--red), var(--fire), var(--gold), var(--green));
+  background: linear-gradient(90deg, var(--sunset), var(--gold), var(--green), var(--sky));
   transition: width 0.5s ease;
   position: relative;
   border-radius: 10px;
-  box-shadow: 0 0 12px rgba(255,107,53,0.4);
+  box-shadow: 0 0 12px rgba(68,221,136,0.3);
 }
 
 .progress-bar-inner::after {
@@ -163,7 +163,7 @@ header h1 {
   padding: 16px;
   margin-bottom: 16px;
   animation: pulse-border 2s infinite;
-  border: 2px solid rgba(255,59,59,0.3);
+  border: 2px solid rgba(232,80,80,0.3);
   border-left: 4px solid var(--red);
 }
 
@@ -172,7 +172,7 @@ header h1 {
   font-size: 10px;
   color: var(--red);
   margin-bottom: 8px;
-  text-shadow: 0 0 8px rgba(255,59,59,0.3);
+  text-shadow: 0 0 8px rgba(232,80,80,0.3);
 }
 
 .warning-banner ul {
@@ -194,7 +194,7 @@ header h1 {
 
 @keyframes pulse-border {
   0%, 100% { border-left-color: var(--red); }
-  50% { border-left-color: var(--fire); }
+  50% { border-left-color: var(--sunset); }
 }
 
 .hidden { display: none !important; }
@@ -225,12 +225,12 @@ header h1 {
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-.pixel-btn:hover { transform: scale(1.05); border-color: var(--gold); box-shadow: 0 0 12px rgba(255,215,0,0.2); }
+.pixel-btn:hover { transform: scale(1.05); border-color: var(--green); box-shadow: 0 0 12px rgba(68,221,136,0.2); }
 .pixel-btn:active { transform: scale(0.95); }
-.pixel-btn.gold { background: linear-gradient(180deg, var(--gold), var(--gold-dark)); color: #1a1a2e; border-color: var(--gold); }
-.pixel-btn.green { background: linear-gradient(180deg, var(--green), var(--green-dark)); color: #1a1a2e; border-color: var(--green); }
+.pixel-btn.gold { background: linear-gradient(180deg, var(--gold), var(--gold-dark)); color: #0a1a12; border-color: var(--gold); }
+.pixel-btn.green { background: linear-gradient(180deg, var(--green), var(--green-dark)); color: #0a1a12; border-color: var(--green); }
 .pixel-btn.red { background: linear-gradient(180deg, var(--red), #aa2222); color: #fff; border-color: var(--red); }
-.pixel-btn.active { background: linear-gradient(180deg, var(--fire), var(--fire-dark)); color: #fff; border-color: var(--fire); }
+.pixel-btn.active { background: linear-gradient(180deg, var(--sunset), #cc5522); color: #fff; border-color: var(--sunset); }
 .pixel-btn.small { font-size: 8px; padding: 8px 12px; min-height: 36px; }
 
 /* BOOK LIST */
@@ -251,8 +251,8 @@ header h1 {
 
 .book-card:hover {
   transform: translateX(4px);
-  border-color: var(--fire);
-  box-shadow: 0 0 16px rgba(255,107,53,0.15), inset 0 0 20px rgba(255,107,53,0.03);
+  border-color: var(--green);
+  box-shadow: 0 0 16px rgba(68,221,136,0.12), inset 0 0 20px rgba(68,221,136,0.03);
 }
 
 .book-card.completed {
@@ -261,7 +261,7 @@ header h1 {
 }
 
 .book-card.completed .book-title::after {
-  content: ' CAUGHT';
+  content: ' ✓';
   color: var(--green);
   font-size: 8px;
 }
@@ -295,13 +295,13 @@ header h1 {
   font-family: 'Press Start 2P', monospace;
   font-size: 8px;
   padding: 4px 10px;
-  background: linear-gradient(135deg, #1a1030, #2a1040);
-  color: var(--dragon);
+  background: linear-gradient(135deg, #1a1508, #2a2010);
+  color: var(--sunset);
   white-space: nowrap;
   flex-shrink: 0;
-  border: 2px solid var(--dragon);
+  border: 2px solid var(--sunset);
   border-radius: 3px;
-  text-shadow: 0 0 6px rgba(123,104,238,0.4);
+  text-shadow: 0 0 6px rgba(238,119,68,0.3);
 }
 
 .book-progress {
@@ -370,16 +370,16 @@ header h1 {
   position: relative;
   border: 2px solid var(--border-bright);
   border-radius: 8px;
-  box-shadow: 0 0 30px rgba(255,107,53,0.1), 0 8px 32px rgba(0,0,0,0.5);
+  box-shadow: 0 0 30px rgba(68,221,136,0.08), 0 8px 32px rgba(0,0,0,0.5);
 }
 
 .modal h3 {
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
-  color: var(--fire);
+  color: var(--gold);
   margin-bottom: 4px;
   line-height: 1.6;
-  text-shadow: 0 0 8px rgba(255,107,53,0.3);
+  text-shadow: 0 0 8px rgba(240,192,64,0.25);
 }
 
 .modal .modal-author {
@@ -436,7 +436,7 @@ header h1 {
   justify-content: center;
 }
 
-.modal-close:hover { color: var(--red); text-shadow: 0 0 8px rgba(255,59,59,0.5); }
+.modal-close:hover { color: var(--red); text-shadow: 0 0 8px rgba(232,80,80,0.4); }
 
 /* SPARKLE ANIMATION */
 @keyframes sparkle {
@@ -467,11 +467,11 @@ header h1 {
   position: fixed;
   font-family: 'Press Start 2P', monospace;
   font-size: 16px;
-  color: var(--fire);
+  color: var(--gold);
   pointer-events: none;
   z-index: 200;
   animation: levelup 1.2s ease-out forwards;
-  text-shadow: 2px 2px 0 var(--fire-dark), 0 0 16px rgba(255,107,53,0.5);
+  text-shadow: 2px 2px 0 var(--gold-dark), 0 0 16px rgba(240,192,64,0.5);
 }
 
 /* EDIT MODE */
@@ -495,7 +495,7 @@ header h1 {
 .edit-row label {
   font-family: 'Press Start 2P', monospace;
   font-size: 8px;
-  color: var(--steel);
+  color: var(--text-dim);
   min-width: 90px;
 }
 
@@ -512,9 +512,9 @@ header h1 {
 }
 
 .edit-row input:focus {
-  border-color: var(--fire);
+  border-color: var(--green);
   outline: none;
-  box-shadow: 0 0 8px rgba(255,107,53,0.2);
+  box-shadow: 0 0 8px rgba(68,221,136,0.2);
 }
 
 .edit-row input.wide { width: 100%; max-width: 300px; }
@@ -574,9 +574,9 @@ header h1 {
 }
 
 .add-book-form input:focus {
-  border-color: var(--fire);
+  border-color: var(--green);
   outline: none;
-  box-shadow: 0 0 8px rgba(255,107,53,0.2);
+  box-shadow: 0 0 8px rgba(68,221,136,0.2);
 }
 
 /* STATS FOOTER */
@@ -590,7 +590,7 @@ footer {
 footer h2 {
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
-  color: var(--steel);
+  color: var(--text-dim);
   margin-bottom: 16px;
   letter-spacing: 2px;
 }
@@ -609,14 +609,14 @@ footer h2 {
 .footer-stat .fs-value {
   font-family: 'Press Start 2P', monospace;
   font-size: 16px;
-  color: var(--fire);
-  text-shadow: 0 0 8px rgba(255,107,53,0.3);
+  color: var(--green);
+  text-shadow: 0 0 8px rgba(68,221,136,0.25);
 }
 
 .footer-stat .fs-label {
   font-family: 'Press Start 2P', monospace;
   font-size: 7px;
-  color: var(--steel);
+  color: var(--text-dim);
   margin-top: 4px;
 }
 
@@ -648,7 +648,7 @@ footer h2 {
   gap: 10px;
   padding: 12px 16px;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #1a1a2e, #1e1030);
+  background: linear-gradient(135deg, #0f1f16, #141a10);
   border-left: 4px solid var(--gold);
   border: 2px solid rgba(255,215,0,0.2);
   border-left: 4px solid var(--gold);
@@ -674,21 +674,21 @@ footer h2 {
 .reading-now h2 {
   font-family: 'Press Start 2P', monospace;
   font-size: 11px;
-  color: var(--fire);
+  color: var(--green);
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
-  text-shadow: 0 0 10px rgba(255,107,53,0.3);
+  text-shadow: 0 0 10px rgba(68,221,136,0.3);
 }
 
 .reading-now h2 .blink-dot {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background: var(--fire);
+  background: var(--green);
   animation: blink 1.2s step-start infinite;
-  box-shadow: 0 0 6px rgba(255,107,53,0.5);
+  box-shadow: 0 0 6px rgba(68,221,136,0.5);
 }
 
 @keyframes blink {
@@ -699,11 +699,11 @@ footer h2 {
   background: linear-gradient(135deg, var(--card-bg), #12122a);
   padding: 16px;
   margin-bottom: 10px;
-  border-left: 4px solid var(--fire);
+  border-left: 4px solid var(--green);
   border: 2px solid var(--border);
-  border-left: 4px solid var(--fire);
+  border-left: 4px solid var(--green);
   border-radius: 6px;
-  box-shadow: 0 0 16px rgba(255,107,53,0.08);
+  box-shadow: 0 0 16px rgba(68,221,136,0.06);
 }
 
 .rn-card .rn-top {
@@ -756,7 +756,7 @@ footer h2 {
   font-size: 9px;
   color: var(--gold);
   margin-bottom: 10px;
-  text-shadow: 0 0 6px rgba(255,215,0,0.2);
+  text-shadow: 0 0 6px rgba(240,192,64,0.2);
 }
 
 .rn-card .rn-quick-btns {
@@ -778,10 +778,10 @@ footer h2 {
 .order-mode-overlay h2 {
   font-family: 'Press Start 2P', monospace;
   font-size: 12px;
-  color: var(--fire);
+  color: var(--gold);
   text-align: center;
   margin-bottom: 8px;
-  text-shadow: 0 0 10px rgba(255,107,53,0.3);
+  text-shadow: 0 0 10px rgba(240,192,64,0.25);
 }
 
 .order-mode-overlay .order-hint {
@@ -815,10 +815,10 @@ footer h2 {
 
 .order-item:active { cursor: grabbing; }
 
-.order-item:hover { background: var(--card-bg-hover); border-color: var(--fire); }
+.order-item:hover { background: var(--card-bg-hover); border-color: var(--green); }
 
 .order-item.drag-over {
-  border-top: 3px solid var(--fire);
+  border-top: 3px solid var(--gold);
 }
 
 .order-item.dragging {
@@ -838,8 +838,8 @@ footer h2 {
 }
 
 .order-item .order-num.current {
-  color: var(--fire);
-  text-shadow: 0 0 6px rgba(255,107,53,0.4);
+  color: var(--green);
+  text-shadow: 0 0 6px rgba(68,221,136,0.4);
 }
 
 .order-item .order-title {
@@ -884,11 +884,11 @@ footer h2 {
 .queue-badge {
   font-family: 'Press Start 2P', monospace;
   font-size: 7px;
-  color: var(--steel);
+  color: var(--sky);
   margin-top: 8px;
   padding: 4px 8px;
-  background: rgba(106,140,175,0.1);
-  border: 1px solid rgba(106,140,175,0.2);
+  background: rgba(68,170,238,0.08);
+  border: 1px solid rgba(68,170,238,0.2);
   border-radius: 3px;
   display: inline-block;
 }
@@ -923,7 +923,7 @@ footer h2 {
 .sync-setup h3 {
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
-  color: var(--fire);
+  color: var(--gold);
   margin-bottom: 12px;
 }
 
@@ -948,9 +948,9 @@ footer h2 {
 }
 
 .sync-setup input:focus {
-  border-color: var(--fire);
+  border-color: var(--green);
   outline: none;
-  box-shadow: 0 0 8px rgba(255,107,53,0.2);
+  box-shadow: 0 0 8px rgba(68,221,136,0.2);
 }
 
 .sync-setup .sync-btns {
@@ -974,22 +974,22 @@ footer h2 {
 
 <div class="container">
   <header>
-    <h1>BOOKDEX 2026</h1>
+    <h1>READING QUEST 2026</h1>
     <div class="header-stats">
       <div class="stat-box pixel-border">
         <div class="stat-label">Days Left</div>
         <div class="stat-value" id="days-left">—</div>
       </div>
       <div class="stat-box pixel-border">
-        <div class="stat-label">EXP</div>
+        <div class="stat-label">XP</div>
         <div class="stat-value" id="xp-count">0</div>
       </div>
       <div class="stat-box pixel-border">
-        <div class="stat-label">Caught</div>
+        <div class="stat-label">Books Done</div>
         <div class="stat-value" id="books-done">0/0</div>
       </div>
       <div class="stat-box pixel-border hidden" id="schedule-box">
-        <div class="stat-label">Pace</div>
+        <div class="stat-label">Schedule</div>
         <div class="stat-value" id="schedule-delta">—</div>
       </div>
     </div>
@@ -1015,16 +1015,16 @@ footer h2 {
   <div class="reading-now" id="reading-now"></div>
 
   <div class="toolbar">
-    <button class="pixel-btn gold" id="btn-reroll" title="Recalculate daily targets">↻ Recalculate</button>
-    <button class="pixel-btn red" id="btn-reset-today" title="Undo all pages logged today">↺ Reset</button>
-    <button class="pixel-btn" id="btn-order" title="Set reading order">⇅ Party Order</button>
+    <button class="pixel-btn gold" id="btn-reroll" title="Recalculate daily targets">↻ Calculate Targets</button>
+    <button class="pixel-btn red" id="btn-reset-today" title="Undo all pages logged today">↺ Reset Today</button>
+    <button class="pixel-btn" id="btn-order" title="Set reading order">⇅ Order</button>
     <button class="pixel-btn" id="btn-edit" title="Toggle edit mode">✎ Edit</button>
-    <button class="pixel-btn green hidden" id="btn-add-book" title="Add a new book">+ Catch New</button>
+    <button class="pixel-btn green hidden" id="btn-add-book" title="Add a new book">+ Add Book</button>
     <button class="pixel-btn green hidden" id="btn-save" title="Save changes">✓ Save</button>
   </div>
 
   <div class="add-book-section pixel-border" id="add-book-section">
-    <h3>+ NEW ENCOUNTER</h3>
+    <h3>+ NEW BOOK</h3>
     <div class="add-book-form">
       <input type="text" id="new-title" placeholder="Title">
       <input type="text" id="new-author" placeholder="Author">
@@ -1037,11 +1037,11 @@ footer h2 {
   <div class="book-list" id="book-list"></div>
 
   <footer>
-    <h2>- TRAINER STATS -</h2>
+    <h2>— STATS —</h2>
     <div class="footer-stats">
       <div class="footer-stat">
         <div class="fs-value" id="stat-completed">0/0</div>
-        <div class="fs-label">Caught</div>
+        <div class="fs-label">Books Done</div>
       </div>
       <div class="footer-stat">
         <div class="fs-value" id="stat-pages">0</div>
@@ -1049,7 +1049,7 @@ footer h2 {
       </div>
       <div class="footer-stat">
         <div class="fs-value" id="stat-avg">0</div>
-        <div class="fs-label">Avg EXP/Day</div>
+        <div class="fs-label">Avg Pages/Day</div>
       </div>
       <div class="footer-stat">
         <div class="fs-value" id="stat-streak">0</div>
@@ -1087,8 +1087,8 @@ footer h2 {
 </div>
 
 <div class="order-mode-overlay hidden" id="order-overlay">
-  <h2>PARTY ORDER</h2>
-  <div class="order-hint">Drag to reorder. Top = next encounter.</div>
+  <h2>READING ORDER</h2>
+  <div class="order-hint">Drag to reorder. Top book = reading next.</div>
   <div class="order-list" id="order-list"></div>
   <div class="order-mode-btns">
     <button class="pixel-btn green" id="btn-order-done">✓ Done</button>
@@ -1557,16 +1557,16 @@ footer h2 {
 
   // --- Rendering ---
   function getProgressColor(pct) {
-    if (pct < 0.33) return `var(--red)`;
-    if (pct < 0.66) return `var(--fire)`;
+    if (pct < 0.33) return `var(--sunset)`;
+    if (pct < 0.66) return `var(--gold)`;
     return `var(--green)`;
   }
 
   function getProgressGradient(pct) {
     if (pct >= 1) return 'var(--green)';
-    if (pct >= 0.66) return 'linear-gradient(90deg, var(--fire), var(--green))';
-    if (pct >= 0.33) return 'linear-gradient(90deg, var(--red), var(--fire))';
-    return 'var(--red)';
+    if (pct >= 0.66) return 'linear-gradient(90deg, var(--gold), var(--green))';
+    if (pct >= 0.33) return 'linear-gradient(90deg, var(--sunset), var(--gold))';
+    return 'var(--sunset)';
   }
 
   function render() {
@@ -1648,7 +1648,7 @@ footer h2 {
         .find(({ book: b }) => b.totalPages != null && b.pagesRead < b.totalPages && b.title !== book.title);
 
       rnContainer.innerHTML = `
-        <h2><span class="blink-dot"></span> IN BATTLE</h2>
+        <h2><span class="blink-dot"></span> READING NOW</h2>
         <div class="rn-card pixel-border">
           <div class="rn-top">
             <div>
@@ -1659,7 +1659,7 @@ footer h2 {
           </div>
           <div class="rn-progress-row">
             <div class="rn-bar pixel-border"><div class="rn-bar-fill" style="width:${(bpct*100).toFixed(1)}%;background:${getProgressGradient(bpct)}"></div></div>
-            <span>${book.pagesRead}/${book.totalPages ?? '?'} HP</span>
+            <span>${book.pagesRead}/${book.totalPages ?? '?'}</span>
           </div>
           ${target ? `<div class="rn-target">Today's target: ${target} pages${todayPages > 0 ? ` (done: ${todayPages})` : ''}</div>` : ''}
           <div class="rn-quick-btns">
@@ -1669,13 +1669,13 @@ footer h2 {
             <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="50">+50</button>
             <button class="pixel-btn small" data-rn-idx="${index}" data-pages="custom">other</button>
           </div>
-          ${nextBook ? `<div class="queue-badge">NEXT ENCOUNTER: ${escapeHtml(nextBook.book.title)}</div>` : ''}
+          ${nextBook ? `<div class="queue-badge">UP NEXT: ${escapeHtml(nextBook.book.title)}</div>` : ''}
         </div>`;
     } else {
       rnContainer.innerHTML = `
-        <h2><span class="blink-dot"></span> HALL OF FAME</h2>
+        <h2><span class="blink-dot"></span> READING NOW</h2>
         <div class="rn-card pixel-border" style="border-left-color:var(--gold)">
-          <div class="rn-title" style="color:var(--gold)">All books caught! CHAMPION</div>
+          <div class="rn-title" style="color:var(--gold)">All books complete! ★</div>
         </div>`;
     }
 
@@ -1901,14 +1901,14 @@ footer h2 {
     container.style.left = (window.innerWidth / 2 - 50) + 'px';
     container.style.top = (window.innerHeight / 2 - 50) + 'px';
 
-    const symbols = ['★', '◆', '▲', '●', '■'];
-    for (let i = 0; i < 10; i++) {
+    const symbols = ['★', '✦', '✧', '◆', '♦'];
+    for (let i = 0; i < 8; i++) {
       const s = document.createElement('div');
       s.className = 'sparkle';
       s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
       s.style.left = (Math.random() * 100) + 'px';
       s.style.top = (Math.random() * 100) + 'px';
-      s.style.color = ['var(--fire)', 'var(--gold)', 'var(--electric)'][Math.floor(Math.random() * 3)];
+      s.style.color = ['var(--gold)', 'var(--green)', '#fff'][Math.floor(Math.random() * 3)];
       s.style.animationDelay = (Math.random() * 0.3) + 's';
       container.appendChild(s);
     }
@@ -1920,7 +1920,7 @@ footer h2 {
   function showLevelUp(title) {
     const el = document.createElement('div');
     el.className = 'levelup-text';
-    el.textContent = `GOTCHA! BOOK CAUGHT!`;
+    el.textContent = `★ BOOK COMPLETE! ★`;
     el.style.left = '50%';
     el.style.top = '40%';
     el.style.transform = 'translateX(-50%)';
