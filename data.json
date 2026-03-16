@@ -3,14 +3,14 @@
     {
       "title": "Nausea",
       "author": "Jean-Paul Sartre",
-      "pagesRead": 0,
+      "pagesRead": 138,
       "totalPages": 138,
       "difficulty": 6
     },
     {
       "title": "The Soundscape",
       "author": "R. Murray Schafer",
-      "pagesRead": 14,
+      "pagesRead": 264,
       "totalPages": 264,
       "difficulty": 7
     },
@@ -95,7 +95,7 @@
     {
       "title": "The Mountains Sing",
       "author": "Nguyễn Phan Quế Mai",
-      "pagesRead": 0,
+      "pagesRead": 150,
       "totalPages": 342,
       "difficulty": 4
     },
@@ -151,38 +151,106 @@
     12,
     10
   ],
-  "readingLog": [],
+  "readingLog": [
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
+      "pages": 50
+    }
+  ],
   "dailyTargets": {
-    "Eichmann in Jerusalem": 9,
-    "Psychotherapy East & West": 9,
-    "Ghosts of My Life": 10,
-    "Wherever You Go, There You Are": 14,
-    "The Fire Next Time": 12,
-    "The Birth of Tragedy": 8,
-    "Fear and Trembling": 8,
-    "Oneness vs The 1%": 11,
-    "The Patterning Instinct": 10,
-    "The Name of the Rose": 10,
-    "She Comes First": 15,
-    "Caliban and the Witch": 9
+    "Nausea": 15,
+    "The Soundscape": 13,
+    "The Mountains Sing": 18,
+    "9 Out of 10 Climbers Make the Same Mistakes": 20,
+    "Lolita": 15,
+    "Down and Out in Paris and London": 20,
+    "Eichmann in Jerusalem": 13,
+    "Psychotherapy East & West": 13,
+    "Ghosts of My Life": 15,
+    "Wherever You Go, There You Are": 20,
+    "The Fire Next Time": 18,
+    "The Birth of Tragedy": 11,
+    "Fear and Trembling": 12,
+    "Oneness vs The 1%": 16,
+    "The Patterning Instinct": 15,
+    "The Name of the Rose": 16,
+    "She Comes First": 23,
+    "Caliban and the Witch": 13
   },
   "bookFinishDates": {
-    "Eichmann in Jerusalem": "2026-04-15T11:10:22.979Z",
-    "Psychotherapy East & West": "2026-05-02T11:10:22.979Z",
-    "Ghosts of My Life": "2026-05-27T11:10:22.979Z",
-    "Wherever You Go, There You Are": "2026-06-18T11:10:22.979Z",
-    "The Fire Next Time": "2026-06-27T11:10:22.979Z",
-    "The Birth of Tragedy": "2026-07-15T11:10:22.979Z",
-    "Fear and Trembling": "2026-08-02T11:10:22.979Z",
-    "Oneness vs The 1%": "2026-08-18T11:10:22.979Z",
-    "The Patterning Instinct": "2026-09-17T11:10:22.979Z",
-    "The Name of the Rose": "2026-11-14T11:10:22.979Z",
-    "She Comes First": "2026-11-28T11:10:22.979Z",
-    "Caliban and the Witch": "2026-12-28T11:10:22.979Z"
+    "Nausea": "2026-03-26T11:19:53.355Z",
+    "The Soundscape": "2026-04-15T11:19:53.355Z",
+    "The Mountains Sing": "2026-05-04T11:19:53.355Z",
+    "9 Out of 10 Climbers Make the Same Mistakes": "2026-05-13T11:19:53.355Z",
+    "Lolita": "2026-06-04T11:19:53.355Z",
+    "Down and Out in Paris and London": "2026-06-16T11:19:53.355Z",
+    "Eichmann in Jerusalem": "2026-07-10T11:19:53.355Z",
+    "Psychotherapy East & West": "2026-07-22T11:19:53.355Z",
+    "Ghosts of My Life": "2026-08-08T11:19:53.355Z",
+    "Wherever You Go, There You Are": "2026-08-23T11:19:53.355Z",
+    "The Fire Next Time": "2026-08-29T11:19:53.355Z",
+    "The Birth of Tragedy": "2026-09-11T11:19:53.355Z",
+    "Fear and Trembling": "2026-09-23T11:19:53.355Z",
+    "Oneness vs The 1%": "2026-10-04T11:19:53.355Z",
+    "The Patterning Instinct": "2026-10-24T11:19:53.355Z",
+    "The Name of the Rose": "2026-11-29T11:19:53.355Z",
+    "She Comes First": "2026-12-08T11:19:53.355Z",
+    "Caliban and the Witch": "2026-12-29T11:19:53.355Z"
   },
   "dailyTargetCheck": {
-    "totalDaysNeeded": 287,
-    "daysLeft": 290,
-    "finishDate": "2026-12-28T11:10:22.979Z"
+    "totalDaysNeeded": 288,
+    "daysLeft": 289,
+    "finishDate": "2026-12-29T11:19:53.355Z"
   }
 }
