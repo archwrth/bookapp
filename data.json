@@ -82,7 +82,8 @@
       "author": "Vladimir Nabokov",
       "pagesRead": 0,
       "totalPages": 317,
-      "difficulty": 6
+      "difficulty": 6,
+      "estimatedPages": true
     },
     {
       "title": "She Comes First",
