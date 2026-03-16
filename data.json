@@ -95,7 +95,7 @@
     {
       "title": "The Mountains Sing",
       "author": "Nguyễn Phan Quế Mai",
-      "pagesRead": 300,
+      "pagesRead": 342,
       "totalPages": 342,
       "difficulty": 4
     },
@@ -190,6 +190,11 @@
     {
       "date": "2026-03-16",
       "title": "The Soundscape",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
       "pages": 50
     },
     {
