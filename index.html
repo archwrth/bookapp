@@ -1449,18 +1449,24 @@ footer h2 {
     };
   }
 
-  // How far ahead/behind a linear Jan 1 → Dec 31 schedule
+  // How far ahead/behind schedule (linear from first reading day → Dec 31)
   function getScheduleDelta() {
     const totalPages = books.reduce((s, b) => s + (b.totalPages || 0), 0);
     if (totalPages === 0) return null;
+    if (readingLog.length === 0) return { delta: 0, expectedByNow: 0, totalRead: 0 };
 
     const totalRead = books.reduce((s, b) => s + (b.pagesRead || 0), 0);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const yearStart = new Date(2026, 0, 1);
-    const totalYearDays = Math.ceil((DEADLINE - yearStart) / 86400000);
-    const elapsed = Math.max(0, Math.ceil((today - yearStart) / 86400000));
-    const expectedByNow = Math.round((elapsed / totalYearDays) * totalPages);
+
+    // Start date = first log entry
+    const sortedDates = readingLog.map(e => e.date).sort();
+    const startDate = new Date(sortedDates[0] + 'T00:00:00');
+    const totalDays = Math.ceil((DEADLINE - startDate) / 86400000);
+    const elapsed = Math.max(0, Math.ceil((today - startDate) / 86400000));
+    if (totalDays <= 0) return null;
+
+    const expectedByNow = Math.round((elapsed / totalDays) * totalPages);
     const delta = totalRead - expectedByNow;
 
     return { delta, expectedByNow, totalRead };
