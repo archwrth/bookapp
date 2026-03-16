@@ -3,7 +3,7 @@
     {
       "title": "Nausea",
       "author": "Jean-Paul Sartre",
-      "pagesRead": 26,
+      "pagesRead": 138,
       "totalPages": 138,
       "difficulty": 6
     },
@@ -151,7 +151,23 @@
     12,
     10
   ],
-  "readingLog": [],
+  "readingLog": [
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 50
+    }
+  ],
   "dailyTargets": {
     "Nausea": 14,
     "The Soundscape": 14,
