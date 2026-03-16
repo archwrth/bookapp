@@ -1280,21 +1280,22 @@ footer h2 {
   'use strict';
 
   const DEADLINE = new Date(2026, 11, 31); // Dec 31, 2026
+  const TARGET_START = new Date(2026, 2, 17); // Mar 17, 2026 — fixed start for target calculation
   const LS_BOOKS = 'rq_books';
   const LS_ORDER = 'rq_order';
   const LS_LOG = 'rq_log';
   const LS_SOUND = 'rq_sound';
 
   const DEFAULT_BOOKS = [
-    {"title":"Nausea","author":"Jean-Paul Sartre","pagesRead":54,"totalPages":138,"difficulty":6},
-    {"title":"The Soundscape","author":"R. Murray Schafer","pagesRead":18,"totalPages":264,"difficulty":7},
-    {"title":"Psychotherapy East & West","author":"Alan W. Watts","pagesRead":59,"totalPages":205,"difficulty":7},
-    {"title":"Ghosts of My Life","author":"Mark Fisher","pagesRead":49,"totalPages":267,"difficulty":6},
-    {"title":"The Birth of Tragedy","author":"Friedrich Nietzsche","pagesRead":4,"totalPages":142,"difficulty":9},
+    {"title":"Nausea","author":"Jean-Paul Sartre","pagesRead":26,"totalPages":138,"difficulty":6},
+    {"title":"The Soundscape","author":"R. Murray Schafer","pagesRead":14,"totalPages":264,"difficulty":7},
+    {"title":"Psychotherapy East & West","author":"Alan W. Watts","pagesRead":55,"totalPages":205,"difficulty":7},
+    {"title":"Ghosts of My Life","author":"Mark Fisher","pagesRead":17,"totalPages":267,"difficulty":6},
+    {"title":"The Birth of Tragedy","author":"Friedrich Nietzsche","pagesRead":0,"totalPages":142,"difficulty":9},
     {"title":"Fear and Trembling","author":"Søren Kierkegaard","pagesRead":0,"totalPages":141,"difficulty":8},
     {"title":"Wherever You Go, There You Are","author":"Jon Kabat-Zinn","pagesRead":0,"totalPages":299,"difficulty":3},
     {"title":"Oneness vs The 1%","author":"Vandana Shiva","pagesRead":0,"totalPages":173,"difficulty":5},
-    {"title":"The Patterning Instinct","author":"Jeremy Lent","pagesRead":160,"totalPages":430,"difficulty":6},
+    {"title":"The Patterning Instinct","author":"Jeremy Lent","pagesRead":130,"totalPages":430,"difficulty":6},
     {"title":"The Name of the Rose","author":"Umberto Eco","pagesRead":0,"totalPages":576,"difficulty":7},
     {"title":"Caliban and the Witch","author":"Silvia Federici","pagesRead":0,"totalPages":268,"difficulty":7},
     {"title":"Lolita","author":"Vladimir Nabokov","pagesRead":0,"totalPages":317,"difficulty":6,"estimatedPages":true},
@@ -1636,7 +1637,11 @@ footer h2 {
 
   function calculateTargets() {
     dailyTargets = {};
-    const daysLeft = getDaysLeft();
+
+    // Fixed window: always calculate from TARGET_START to DEADLINE
+    const startDate = new Date(TARGET_START.getFullYear(), TARGET_START.getMonth(), TARGET_START.getDate());
+    const endDate = new Date(DEADLINE.getFullYear(), DEADLINE.getMonth(), DEADLINE.getDate());
+    const daysLeft = Math.max(1, Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)));
 
     // Get active books in reading order
     const activeBooks = bookOrder
@@ -1645,17 +1650,28 @@ footer h2 {
 
     if (activeBooks.length === 0) return;
 
+    // Build per-book log totals so we can compute baseline remaining.
+    // Baseline pagesRead = current pagesRead minus pages logged via Reading Now.
+    // This means edits to pagesRead (which don't create log entries) shift the
+    // baseline, but daily reading progress does not.
+    const loggedByTitle = {};
+    for (const entry of readingLog) {
+      loggedByTitle[entry.title] = (loggedByTitle[entry.title] || 0) + entry.pages;
+    }
+
     // Sequential reading model: allocate days to each book proportionally
     // by difficulty-weighted effort, then calculate pages/day per book.
     //
-    // 1. Each book's "effort" = remaining pages × difficulty multiplier
+    // 1. Each book's "effort" = baseline remaining pages × difficulty multiplier
     //    Multiplier is compressed: maps difficulty 1→0.8, 5→1.0, 10→1.25
     //    so the hardest book only gets ~1.5x the time of the easiest
     // 2. Each book gets a share of total days proportional to its effort
-    // 3. Pages/day for that book = remaining pages / allocated days
+    // 3. Pages/day for that book = baseline remaining pages / allocated days
 
     const bookData = activeBooks.map(b => {
-      const remaining = b.totalPages - b.pagesRead;
+      const logged = loggedByTitle[b.title] || 0;
+      const baselinePagesRead = (b.pagesRead || 0) - logged;
+      const remaining = b.totalPages - baselinePagesRead;
       const diffMultiplier = 1 + (b.difficulty - 5) * 0.1;
       const effort = remaining * diffMultiplier;
       return { book: b, remaining, diffMultiplier, effort };
