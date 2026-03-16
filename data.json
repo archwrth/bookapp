@@ -10,7 +10,7 @@
     {
       "title": "The Soundscape",
       "author": "R. Murray Schafer",
-      "pagesRead": 252,
+      "pagesRead": 264,
       "totalPages": 264,
       "difficulty": 7
     },
@@ -95,7 +95,7 @@
     {
       "title": "The Mountains Sing",
       "author": "Nguyễn Phan Quế Mai",
-      "pagesRead": 0,
+      "pagesRead": 188,
       "totalPages": 342,
       "difficulty": 4
     },
@@ -190,6 +190,31 @@
     {
       "date": "2026-03-16",
       "title": "The Soundscape",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 12
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
+      "pages": 38
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
       "pages": 50
     }
   ],
