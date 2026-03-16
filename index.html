@@ -1063,6 +1063,7 @@ footer h2 {
   let editMode = false;
   let soundEnabled = JSON.parse(localStorage.getItem(LS_SOUND) ?? 'true');
   let dailyTargets = {};
+  let bookFinishDates = {};
   let dailyTargetCheck = null;
 
   // --- Audio ---
@@ -1407,6 +1408,20 @@ footer h2 {
       safety++;
     }
 
+    // Compute per-book finish dates based on reading order (sequential)
+    bookFinishDates = {};
+    let cumulativeDays = 0;
+    const orderedActive = bookOrder
+      .map(i => books[i])
+      .filter(b => dailyTargets[b.title]);
+    for (const b of orderedActive) {
+      const daysForBook = Math.ceil((b.totalPages - b.pagesRead) / dailyTargets[b.title]);
+      cumulativeDays += daysForBook;
+      const finishDate = new Date();
+      finishDate.setDate(finishDate.getDate() + cumulativeDays);
+      bookFinishDates[b.title] = finishDate;
+    }
+
     // Store the verification result for display
     dailyTargetCheck = {
       totalDaysNeeded,
@@ -1567,7 +1582,7 @@ footer h2 {
         </div>
         <div class="book-stats">
           <span>${book.pagesRead || 0} / ${book.estimatedPages ? '~' : ''}${book.totalPages ?? '???'} pages</span>
-          <span class="daily-target ${target ? '' : 'no-target'}">${target ? target + ' pg/day' : '—'}</span>
+          <span class="daily-target ${target ? '' : 'no-target'}">${target ? target + ' pg/day' : '—'}${bookFinishDates[book.title] ? ' · done ' + formatShortDate(bookFinishDates[book.title]) : ''}</span>
         </div>
         <div class="edit-fields">
           <div class="edit-row">
@@ -1638,8 +1653,7 @@ footer h2 {
     if (dailyTargetCheck) {
       finishWrapper.classList.remove('hidden');
       const fd = dailyTargetCheck.finishDate;
-      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      const dateStr = `${months[fd.getMonth()]} ${fd.getDate()}`;
+      const dateStr = formatShortDate(fd);
       const el = document.getElementById('stat-finish');
       el.textContent = dateStr;
       // Color: green if before Dec 31, red if after
@@ -1998,6 +2012,11 @@ footer h2 {
   }
 
   // --- Utilities ---
+  function formatShortDate(d) {
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[d.getMonth()] + ' ' + d.getDate();
+  }
+
   function escapeHtml(s) {
     const div = document.createElement('div');
     div.textContent = s;
