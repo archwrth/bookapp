@@ -2214,6 +2214,11 @@ footer h2 {
     document.getElementById('btn-save').classList.toggle('hidden', !editMode);
     if (!editMode) {
       document.getElementById('add-book-section').classList.remove('visible');
+      // Recalculate targets when leaving edit mode, since edits to
+      // pagesRead/totalPages/difficulty affect the baseline and targets
+      if (Object.keys(dailyTargets).length > 0) {
+        calculateTargets();
+      }
     }
     render();
     playBeep(editMode ? 700 : 500, 0.06);
