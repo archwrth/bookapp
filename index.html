@@ -1292,7 +1292,7 @@ footer h2 {
     {"title":"The Soundscape","author":"R. Murray Schafer","pagesRead":14,"totalPages":264,"difficulty":7},
     {"title":"Psychotherapy East & West","author":"Alan W. Watts","pagesRead":55,"totalPages":205,"difficulty":7},
     {"title":"Ghosts of My Life","author":"Mark Fisher","pagesRead":17,"totalPages":267,"difficulty":6},
-    {"title":"The Birth of Tragedy","author":"Friedrich Nietzsche","pagesRead":0,"totalPages":142,"difficulty":9},
+    {"title":"The Birth of Tragedy","author":"Friedrich Nietzsche","pagesRead":4,"totalPages":142,"difficulty":9},
     {"title":"Fear and Trembling","author":"Søren Kierkegaard","pagesRead":0,"totalPages":141,"difficulty":8},
     {"title":"Wherever You Go, There You Are","author":"Jon Kabat-Zinn","pagesRead":0,"totalPages":299,"difficulty":3},
     {"title":"Oneness vs The 1%","author":"Vandana Shiva","pagesRead":0,"totalPages":173,"difficulty":5},
@@ -1664,11 +1664,15 @@ footer h2 {
       saveBaseline();
     }
 
-    // Get active books in reading order (still filtered by actual pagesRead
-    // so completed books drop out)
+    // Get active books in reading order, filtered by BASELINE pagesRead
+    // so that logging progress never removes books from the calculation
     const activeBooks = bookOrder
       .map(i => books[i])
-      .filter(b => b.totalPages != null && b.difficulty != null && b.pagesRead < b.totalPages);
+      .filter(b => {
+        if (b.totalPages == null || b.difficulty == null) return false;
+        const baselineRead = targetBaseline[b.title] ?? (b.pagesRead || 0);
+        return baselineRead < b.totalPages;
+      });
 
     if (activeBooks.length === 0) return;
 
