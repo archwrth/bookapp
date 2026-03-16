@@ -95,14 +95,14 @@
     {
       "title": "The Mountains Sing",
       "author": "Nguyễn Phan Quế Mai",
-      "pagesRead": 188,
+      "pagesRead": 342,
       "totalPages": 342,
       "difficulty": 4
     },
     {
       "title": "9 Out of 10 Climbers Make the Same Mistakes",
       "author": "Dave MacLeod",
-      "pagesRead": 0,
+      "pagesRead": 146,
       "totalPages": 164,
       "difficulty": 3
     },
@@ -215,6 +215,41 @@
     {
       "date": "2026-03-16",
       "title": "The Mountains Sing",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Mountains Sing",
+      "pages": 4
+    },
+    {
+      "date": "2026-03-16",
+      "title": "9 Out of 10 Climbers Make the Same Mistakes",
+      "pages": 46
+    },
+    {
+      "date": "2026-03-16",
+      "title": "9 Out of 10 Climbers Make the Same Mistakes",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "9 Out of 10 Climbers Make the Same Mistakes",
       "pages": 50
     }
   ],
