@@ -1412,10 +1412,25 @@ footer h2 {
 
     try {
       // Build the full state to save
+      // Serialize finish dates as ISO strings
+      const finishDatesStr = {};
+      for (const [k, v] of Object.entries(bookFinishDates)) {
+        finishDatesStr[k] = v instanceof Date ? v.toISOString() : v;
+      }
+      const targetCheckStr = dailyTargetCheck ? {
+        ...dailyTargetCheck,
+        finishDate: dailyTargetCheck.finishDate instanceof Date
+          ? dailyTargetCheck.finishDate.toISOString()
+          : dailyTargetCheck.finishDate
+      } : null;
+
       const state = {
         books: books,
         bookOrder: bookOrder,
-        readingLog: readingLog
+        readingLog: readingLog,
+        dailyTargets: dailyTargets,
+        bookFinishDates: finishDatesStr,
+        dailyTargetCheck: targetCheckStr
       };
 
       const content = btoa(unescape(encodeURIComponent(JSON.stringify(state, null, 2))));
@@ -1548,6 +1563,19 @@ footer h2 {
       books = ghData.books;
       if (ghData.bookOrder) bookOrder = ghData.bookOrder;
       if (ghData.readingLog) readingLog = ghData.readingLog;
+      if (ghData.dailyTargets) dailyTargets = ghData.dailyTargets;
+      if (ghData.bookFinishDates) {
+        bookFinishDates = {};
+        for (const [k, v] of Object.entries(ghData.bookFinishDates)) {
+          bookFinishDates[k] = new Date(v);
+        }
+      }
+      if (ghData.dailyTargetCheck) {
+        dailyTargetCheck = {
+          ...ghData.dailyTargetCheck,
+          finishDate: new Date(ghData.dailyTargetCheck.finishDate)
+        };
+      }
       localStorage.setItem(LS_BOOKS, JSON.stringify(books));
       localStorage.setItem(LS_ORDER, JSON.stringify(bookOrder));
       localStorage.setItem(LS_LOG, JSON.stringify(readingLog));
@@ -1690,6 +1718,8 @@ footer h2 {
       daysLeft,
       finishDate: new Date(Date.now() + totalDaysNeeded * 86400000)
     };
+
+    scheduleSyncToGitHub();
   }
 
   // How far ahead/behind schedule (linear from first reading day → Dec 31)
