@@ -102,7 +102,7 @@
     {
       "title": "9 Out of 10 Climbers Make the Same Mistakes",
       "author": "Dave MacLeod",
-      "pagesRead": 0,
+      "pagesRead": 100,
       "totalPages": 164,
       "difficulty": 3
     },
@@ -225,6 +225,16 @@
     {
       "date": "2026-03-16",
       "title": "The Mountains Sing",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "9 Out of 10 Climbers Make the Same Mistakes",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "9 Out of 10 Climbers Make the Same Mistakes",
       "pages": 50
     }
   ],
