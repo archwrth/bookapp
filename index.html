@@ -1285,6 +1285,7 @@ footer h2 {
   const LS_ORDER = 'rq_order';
   const LS_LOG = 'rq_log';
   const LS_SOUND = 'rq_sound';
+  const LS_BASELINE = 'rq_baseline';
 
   const DEFAULT_BOOKS = [
     {"title":"Nausea","author":"Jean-Paul Sartre","pagesRead":26,"totalPages":138,"difficulty":6},
@@ -1315,6 +1316,7 @@ footer h2 {
   let dailyTargets = {};
   let bookFinishDates = {};
   let dailyTargetCheck = null;
+  let targetBaseline = {}; // { title: pagesRead } — snapshot for target calc, only updated by edits
 
   // --- Audio ---
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1351,6 +1353,8 @@ footer h2 {
       if (order) bookOrder = JSON.parse(order);
       const log = localStorage.getItem(LS_LOG);
       if (log) readingLog = JSON.parse(log);
+      const baseline = localStorage.getItem(LS_BASELINE);
+      if (baseline) targetBaseline = JSON.parse(baseline);
     } catch(e) {
       console.error('Failed to load localStorage', e);
     }
@@ -1368,6 +1372,11 @@ footer h2 {
 
   function saveLog() {
     localStorage.setItem(LS_LOG, JSON.stringify(readingLog));
+    scheduleSyncToGitHub();
+  }
+
+  function saveBaseline() {
+    localStorage.setItem(LS_BASELINE, JSON.stringify(targetBaseline));
     scheduleSyncToGitHub();
   }
 
@@ -1431,7 +1440,8 @@ footer h2 {
         readingLog: readingLog,
         dailyTargets: dailyTargets,
         bookFinishDates: finishDatesStr,
-        dailyTargetCheck: targetCheckStr
+        dailyTargetCheck: targetCheckStr,
+        targetBaseline: targetBaseline
       };
 
       const content = btoa(unescape(encodeURIComponent(JSON.stringify(state, null, 2))));
@@ -1577,9 +1587,11 @@ footer h2 {
           finishDate: new Date(ghData.dailyTargetCheck.finishDate)
         };
       }
+      if (ghData.targetBaseline) targetBaseline = ghData.targetBaseline;
       localStorage.setItem(LS_BOOKS, JSON.stringify(books));
       localStorage.setItem(LS_ORDER, JSON.stringify(bookOrder));
       localStorage.setItem(LS_LOG, JSON.stringify(readingLog));
+      localStorage.setItem(LS_BASELINE, JSON.stringify(targetBaseline));
       updateSyncIndicator('synced', 'Loaded from GitHub');
       return true;
     }
@@ -1643,24 +1655,27 @@ footer h2 {
     const endDate = new Date(DEADLINE.getFullYear(), DEADLINE.getMonth(), DEADLINE.getDate());
     const daysLeft = Math.max(1, Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)));
 
-    // Get active books in reading order
+    // Initialize baseline snapshot if empty — captures pagesRead as of now.
+    // After this, only edits (not reading progress) update the baseline.
+    if (Object.keys(targetBaseline).length === 0) {
+      for (const b of books) {
+        targetBaseline[b.title] = b.pagesRead || 0;
+      }
+      saveBaseline();
+    }
+
+    // Get active books in reading order (still filtered by actual pagesRead
+    // so completed books drop out)
     const activeBooks = bookOrder
       .map(i => books[i])
       .filter(b => b.totalPages != null && b.difficulty != null && b.pagesRead < b.totalPages);
 
     if (activeBooks.length === 0) return;
 
-    // Build per-book log totals so we can compute baseline remaining.
-    // Baseline pagesRead = current pagesRead minus pages logged via Reading Now.
-    // This means edits to pagesRead (which don't create log entries) shift the
-    // baseline, but daily reading progress does not.
-    const loggedByTitle = {};
-    for (const entry of readingLog) {
-      loggedByTitle[entry.title] = (loggedByTitle[entry.title] || 0) + entry.pages;
-    }
-
     // Sequential reading model: allocate days to each book proportionally
     // by difficulty-weighted effort, then calculate pages/day per book.
+    // Uses baseline pagesRead (frozen snapshot) so that daily reading
+    // progress does not change targets — only edits to pagesRead do.
     //
     // 1. Each book's "effort" = baseline remaining pages × difficulty multiplier
     //    Multiplier is compressed: maps difficulty 1→0.8, 5→1.0, 10→1.25
@@ -1669,9 +1684,8 @@ footer h2 {
     // 3. Pages/day for that book = baseline remaining pages / allocated days
 
     const bookData = activeBooks.map(b => {
-      const logged = loggedByTitle[b.title] || 0;
-      const baselinePagesRead = (b.pagesRead || 0) - logged;
-      const remaining = b.totalPages - baselinePagesRead;
+      const baselineRead = targetBaseline[b.title] ?? (b.pagesRead || 0);
+      const remaining = b.totalPages - baselineRead;
       const diffMultiplier = 1 + (b.difficulty - 5) * 0.1;
       const effort = remaining * diffMultiplier;
       return { book: b, remaining, diffMultiplier, effort };
@@ -1715,15 +1729,17 @@ footer h2 {
     }
 
     // Compute per-book finish dates based on reading order (sequential)
+    // Uses baseline remaining so dates stay consistent with targets
     bookFinishDates = {};
     let cumulativeDays = 0;
     const orderedActive = bookOrder
       .map(i => books[i])
       .filter(b => dailyTargets[b.title]);
     for (const b of orderedActive) {
-      const daysForBook = Math.ceil((b.totalPages - b.pagesRead) / dailyTargets[b.title]);
+      const baselineRead = targetBaseline[b.title] ?? (b.pagesRead || 0);
+      const daysForBook = Math.ceil((b.totalPages - baselineRead) / dailyTargets[b.title]);
       cumulativeDays += daysForBook;
-      const finishDate = new Date();
+      const finishDate = new Date(TARGET_START);
       finishDate.setDate(finishDate.getDate() + cumulativeDays);
       bookFinishDates[b.title] = finishDate;
     }
@@ -1732,7 +1748,7 @@ footer h2 {
     dailyTargetCheck = {
       totalDaysNeeded,
       daysLeft,
-      finishDate: new Date(Date.now() + totalDaysNeeded * 86400000)
+      finishDate: new Date(TARGET_START.getTime() + totalDaysNeeded * 86400000)
     };
 
     scheduleSyncToGitHub();
@@ -2170,6 +2186,13 @@ footer h2 {
     books[idx][field] = val;
     if (field === 'totalPages' && val != null) {
       delete books[idx].estimatedPages;
+    }
+    // When pagesRead is edited directly, update the target baseline so
+    // recalculation picks up the new value (reading progress via logPages
+    // does NOT update the baseline)
+    if (field === 'pagesRead' && val != null) {
+      targetBaseline[books[idx].title] = val;
+      saveBaseline();
     }
     saveBooks();
     // Don't re-render to avoid losing focus, just update on save
