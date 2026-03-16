@@ -3,14 +3,14 @@
     {
       "title": "Nausea",
       "author": "Jean-Paul Sartre",
-      "pagesRead": 76,
+      "pagesRead": 138,
       "totalPages": 138,
       "difficulty": 6
     },
     {
       "title": "The Soundscape",
       "author": "R. Murray Schafer",
-      "pagesRead": 14,
+      "pagesRead": 152,
       "totalPages": 264,
       "difficulty": 7
     },
@@ -155,6 +155,31 @@
     {
       "date": "2026-03-16",
       "title": "Nausea",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 12
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 38
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 50
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
       "pages": 50
     }
   ],
