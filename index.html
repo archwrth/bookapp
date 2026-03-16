@@ -30,17 +30,170 @@
 
 body {
   background: var(--bg);
-  background-image:
-    radial-gradient(ellipse at 15% 0%, rgba(68,170,238,0.08) 0%, transparent 40%),
-    radial-gradient(ellipse at 85% 0%, rgba(238,119,68,0.06) 0%, transparent 35%),
-    radial-gradient(ellipse at 50% 100%, rgba(68,221,136,0.06) 0%, transparent 40%),
-    radial-gradient(ellipse at 0% 60%, rgba(221,85,153,0.04) 0%, transparent 30%);
   color: var(--text);
   font-family: 'Courier New', monospace;
   font-size: 14px;
   line-height: 1.6;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
 }
+
+/* PIXEL JUNGLE BACKGROUND */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    /* Sky gradient */
+    linear-gradient(180deg,
+      #0a1420 0%,
+      #0c1a28 15%,
+      #0a1a12 40%,
+      #0a1a12 100%
+    );
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    /* Stars */
+    radial-gradient(1px 1px at 10% 8%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 25% 4%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 40% 12%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 55% 6%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 70% 3%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 85% 10%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 15% 15%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 60% 14%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 92% 7%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 35% 2%, rgba(255,255,255,0.5), transparent),
+    /* Moon */
+    radial-gradient(circle at 82% 8%, rgba(240,230,200,0.15) 0%, rgba(240,230,200,0.05) 20px, transparent 40px),
+    /* Ambient glow */
+    radial-gradient(ellipse at 15% 0%, rgba(68,170,238,0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 0%, rgba(238,119,68,0.05) 0%, transparent 35%),
+    radial-gradient(ellipse at 50% 100%, rgba(68,221,136,0.06) 0%, transparent 40%);
+}
+
+/* PIXEL TREELINE - rendered via box-shadow on a pseudo element in the scene div */
+.jungle-bg {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Back layer trees - darker, taller */
+.jungle-bg::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background:
+    /* Tall tree shapes via repeating gradients */
+    conic-gradient(from 200deg at 5% 100%, transparent 40%, #061a0a 40%, #061a0a 60%, transparent 60%),
+    conic-gradient(from 200deg at 15% 100%, transparent 38%, #071e0c 38%, #071e0c 62%, transparent 62%),
+    conic-gradient(from 200deg at 28% 100%, transparent 40%, #061a0a 40%, #061a0a 58%, transparent 58%),
+    conic-gradient(from 200deg at 40% 100%, transparent 36%, #081f0d 36%, #081f0d 64%, transparent 64%),
+    conic-gradient(from 200deg at 52% 100%, transparent 40%, #061a0a 40%, #061a0a 60%, transparent 60%),
+    conic-gradient(from 200deg at 65% 100%, transparent 38%, #071e0c 38%, #071e0c 62%, transparent 62%),
+    conic-gradient(from 200deg at 78% 100%, transparent 40%, #061a0a 40%, #061a0a 58%, transparent 58%),
+    conic-gradient(from 200deg at 90% 100%, transparent 36%, #081f0d 36%, #081f0d 64%, transparent 64%);
+  opacity: 0.7;
+}
+
+/* Front layer - lighter canopy */
+.jungle-bg::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background:
+    conic-gradient(from 210deg at 8% 100%, transparent 42%, #0c2a14 42%, #0c2a14 58%, transparent 58%),
+    conic-gradient(from 205deg at 20% 100%, transparent 40%, #0e3018 40%, #0e3018 60%, transparent 60%),
+    conic-gradient(from 210deg at 35% 100%, transparent 42%, #0c2a14 42%, #0c2a14 56%, transparent 56%),
+    conic-gradient(from 205deg at 48% 100%, transparent 38%, #0e3018 38%, #0e3018 62%, transparent 62%),
+    conic-gradient(from 210deg at 60% 100%, transparent 42%, #0c2a14 42%, #0c2a14 58%, transparent 58%),
+    conic-gradient(from 205deg at 73% 100%, transparent 40%, #0d2c16 40%, #0d2c16 60%, transparent 60%),
+    conic-gradient(from 210deg at 85% 100%, transparent 42%, #0c2a14 42%, #0c2a14 56%, transparent 56%),
+    conic-gradient(from 205deg at 95% 100%, transparent 38%, #0e3018 38%, #0e3018 62%, transparent 62%);
+  /* Ground strip */
+  border-bottom: 20px solid #081a0c;
+}
+
+/* FLYING BIRDS */
+@keyframes fly-across {
+  0% { transform: translateX(-40px) translateY(0); opacity: 0; }
+  5% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(calc(100vw + 40px)) translateY(-30px); opacity: 0; }
+}
+
+@keyframes fly-across-reverse {
+  0% { transform: translateX(calc(100vw + 40px)) translateY(0) scaleX(-1); opacity: 0; }
+  5% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(-40px) translateY(-20px) scaleX(-1); opacity: 0; }
+}
+
+@keyframes wing-flap {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.3); }
+}
+
+.bird {
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  font-size: 0;
+}
+
+/* Bird shape via box-shadows - tiny pixel bird */
+.bird::before, .bird::after {
+  content: '';
+  position: absolute;
+  background: var(--text-dim);
+  animation: wing-flap 0.4s ease-in-out infinite;
+}
+
+.bird::before {
+  width: 3px;
+  height: 2px;
+  top: 0;
+  left: 0;
+  box-shadow: 3px 0 0 var(--text-dim);
+}
+
+.bird::after {
+  width: 2px;
+  height: 2px;
+  top: 2px;
+  left: 2px;
+  animation-delay: 0.05s;
+}
+
+.bird:nth-child(1) { top: 6%; animation: fly-across 18s linear infinite; }
+.bird:nth-child(2) { top: 10%; animation: fly-across-reverse 22s linear 4s infinite; }
+.bird:nth-child(3) { top: 4%; animation: fly-across 25s linear 8s infinite; }
+.bird:nth-child(4) { top: 12%; animation: fly-across-reverse 20s linear 12s infinite; }
+.bird:nth-child(5) { top: 8%; animation: fly-across 16s linear 15s infinite; }
+
+.bird:nth-child(2)::before, .bird:nth-child(4)::before { animation-duration: 0.35s; }
+.bird:nth-child(3)::before, .bird:nth-child(5)::before { animation-duration: 0.45s; }
 
 .pixel-border {
   box-shadow:
@@ -972,6 +1125,13 @@ footer h2 {
 </head>
 <body>
 
+<div class="jungle-bg"></div>
+<div class="bird"></div>
+<div class="bird"></div>
+<div class="bird"></div>
+<div class="bird"></div>
+<div class="bird"></div>
+
 <div class="container">
   <header>
     <h1>READING QUEST 2026</h1>
@@ -1109,8 +1269,8 @@ footer h2 {
       <button class="pixel-btn small gold" data-pages="50">+50</button>
     </div>
     <div class="custom-input-row">
-      <input type="number" id="custom-pages" placeholder="Custom" min="1">
-      <button class="pixel-btn small green" id="btn-custom-add">Add</button>
+      <input type="number" id="custom-pages" placeholder="On page..." min="1">
+      <button class="pixel-btn small green" id="btn-custom-add">Set</button>
     </div>
   </div>
 </div>
@@ -1667,7 +1827,7 @@ footer h2 {
             <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="10">+10</button>
             <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="25">+25</button>
             <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="50">+50</button>
-            <button class="pixel-btn small" data-rn-idx="${index}" data-pages="custom">other</button>
+            <button class="pixel-btn small" data-rn-idx="${index}" data-pages="custom">pg#</button>
           </div>
           ${nextBook ? `<div class="queue-badge">UP NEXT: ${escapeHtml(nextBook.book.title)}</div>` : ''}
         </div>`;
@@ -1848,7 +2008,10 @@ footer h2 {
 
     modal.classList.remove('hidden');
     modal.dataset.bookIndex = bookIndex;
-    document.getElementById('custom-pages').value = '';
+    const input = document.getElementById('custom-pages');
+    input.value = '';
+    input.placeholder = `On page... (now ${book.pagesRead || 0})`;
+    input.min = (book.pagesRead || 0) + 1;
     playBeep(600, 0.05);
   }
 
@@ -2251,8 +2414,12 @@ footer h2 {
 
   document.getElementById('btn-custom-add').addEventListener('click', () => {
     const idx = parseInt(document.getElementById('log-modal').dataset.bookIndex);
-    const pages = parseInt(document.getElementById('custom-pages').value);
-    if (pages > 0) logPages(idx, pages);
+    const pageNum = parseInt(document.getElementById('custom-pages').value);
+    const book = books[idx];
+    if (!book || isNaN(pageNum)) return;
+    const currentPages = book.pagesRead || 0;
+    const pagesToAdd = pageNum - currentPages;
+    if (pagesToAdd > 0) logPages(idx, pagesToAdd);
   });
 
   document.getElementById('custom-pages').addEventListener('keydown', (e) => {
