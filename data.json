@@ -3,14 +3,14 @@
     {
       "title": "Nausea",
       "author": "Jean-Paul Sartre",
-      "pagesRead": 54,
+      "pagesRead": 138,
       "totalPages": 138,
       "difficulty": 6
     },
     {
       "title": "The Soundscape",
       "author": "R. Murray Schafer",
-      "pagesRead": 18,
+      "pagesRead": 188,
       "totalPages": 264,
       "difficulty": 7
     },
@@ -151,5 +151,136 @@
     16,
     17
   ],
-  "readingLog": []
+  "readingLog": [
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Nausea",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-16",
+      "title": "The Soundscape",
+      "pages": 10
+    }
+  ]
 }
