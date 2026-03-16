@@ -928,6 +928,7 @@ footer h2 {
 
   <div class="toolbar">
     <button class="pixel-btn gold" id="btn-reroll" title="Recalculate daily targets">↻ Calculate Targets</button>
+    <button class="pixel-btn red" id="btn-reset-today" title="Undo all pages logged today">↺ Reset Today</button>
     <button class="pixel-btn" id="btn-order" title="Set reading order">⇅ Order</button>
     <button class="pixel-btn" id="btn-edit" title="Toggle edit mode">✎ Edit</button>
     <button class="pixel-btn green hidden" id="btn-add-book" title="Add a new book">+ Add Book</button>
@@ -1386,9 +1387,9 @@ footer h2 {
       return s + Math.ceil(d.remaining / dailyTargets[d.book.title]);
     }, 0);
 
-    // Allow 2 days buffer — keep bumping until we fit
+    // Must finish on or before deadline — keep bumping until we fit
     let safety = 0;
-    while (totalDaysNeeded > daysLeft + 2 && safety < 50) {
+    while (totalDaysNeeded > daysLeft && safety < 50) {
       // Find the book where +1 page/day saves the most days
       let bestSaving = 0;
       let bestTitle = null;
@@ -1984,6 +1985,30 @@ footer h2 {
     render();
   }
 
+  // --- Reset Today ---
+  function resetToday() {
+    const today = getDateStr(new Date());
+    const todayEntries = readingLog.filter(e => e.date === today);
+    if (todayEntries.length === 0) return;
+    if (!confirm(`Undo ${todayEntries.length} log entries from today?`)) return;
+
+    // Subtract today's pages from each book
+    for (const entry of todayEntries) {
+      const book = books.find(b => b.title === entry.title);
+      if (book) {
+        book.pagesRead = Math.max(0, (book.pagesRead || 0) - entry.pages);
+      }
+    }
+
+    // Remove today's entries from log
+    readingLog = readingLog.filter(e => e.date !== today);
+
+    saveBooks();
+    saveLog();
+    playBeep(300, 0.15);
+    render();
+  }
+
   // --- Reroll ---
   function reroll() {
     const btn = document.getElementById('btn-reroll');
@@ -2029,6 +2054,7 @@ footer h2 {
 
   // --- Event Listeners ---
   document.getElementById('btn-reroll').addEventListener('click', reroll);
+  document.getElementById('btn-reset-today').addEventListener('click', resetToday);
   document.getElementById('btn-order').addEventListener('click', openOrderMode);
   document.getElementById('btn-order-done').addEventListener('click', closeOrderMode);
   document.getElementById('btn-edit').addEventListener('click', toggleEditMode);
