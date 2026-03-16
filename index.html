@@ -1281,6 +1281,29 @@ footer h2 {
 
   const DEADLINE = new Date(2026, 11, 31); // Dec 31, 2026
   const TARGET_START = new Date(2026, 2, 17); // Mar 17, 2026 — fixed start for target calculation
+
+  // Hardcoded baseline: the pagesRead each book had as of Mar 17.
+  // This is the absolute floor — resetToday and baseline init always use these.
+  const DEFAULT_BASELINE = {
+    "Nausea": 26,
+    "The Soundscape": 14,
+    "Psychotherapy East & West": 55,
+    "Ghosts of My Life": 17,
+    "The Birth of Tragedy": 4,
+    "Fear and Trembling": 0,
+    "Wherever You Go, There You Are": 0,
+    "Oneness vs The 1%": 0,
+    "The Patterning Instinct": 130,
+    "The Name of the Rose": 0,
+    "Caliban and the Witch": 0,
+    "Lolita": 0,
+    "She Comes First": 0,
+    "The Mountains Sing": 0,
+    "9 Out of 10 Climbers Make the Same Mistakes": 0,
+    "Eichmann in Jerusalem": 0,
+    "Down and Out in Paris and London": 0,
+    "The Fire Next Time": 0
+  };
   const LS_BOOKS = 'rq_books';
   const LS_ORDER = 'rq_order';
   const LS_LOG = 'rq_log';
@@ -1655,11 +1678,15 @@ footer h2 {
     const endDate = new Date(DEADLINE.getFullYear(), DEADLINE.getMonth(), DEADLINE.getDate());
     const daysLeft = Math.max(1, Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)));
 
-    // Initialize baseline snapshot if empty — captures pagesRead as of now.
+    // Initialize baseline from hardcoded defaults if empty.
     // After this, only edits (not reading progress) update the baseline.
     if (Object.keys(targetBaseline).length === 0) {
+      targetBaseline = { ...DEFAULT_BASELINE };
+      // Include any books not in DEFAULT_BASELINE (e.g. user-added books)
       for (const b of books) {
-        targetBaseline[b.title] = b.pagesRead || 0;
+        if (!(b.title in targetBaseline)) {
+          targetBaseline[b.title] = b.pagesRead || 0;
+        }
       }
       saveBaseline();
     }
@@ -2100,19 +2127,22 @@ footer h2 {
     const oldPages = book.pagesRead || 0;
     book.pagesRead = oldPages + pages;
 
-    // Cap at total if known
+    // Cap at total and calculate overflow for next book
+    let overflow = 0;
     if (book.totalPages != null && book.pagesRead > book.totalPages) {
+      overflow = book.pagesRead - book.totalPages;
       book.pagesRead = book.totalPages;
     }
 
     const wasComplete = oldPages >= (book.totalPages || Infinity);
     const nowComplete = book.totalPages != null && book.pagesRead >= book.totalPages;
 
-    // Log entry
+    // Log only the pages actually applied to this book
+    const actualPages = book.pagesRead - oldPages;
     readingLog.push({
       date: getDateStr(new Date()),
       title: book.title,
-      pages: pages
+      pages: actualPages
     });
 
     saveBooks();
@@ -2128,6 +2158,18 @@ footer h2 {
     showSparkles();
 
     closeLogModal();
+
+    // Carry overflow to the next incomplete book in reading order
+    if (overflow > 0) {
+      const nextBook = bookOrder
+        .map(i => ({ book: books[i], index: i }))
+        .find(({ book: b }) => b.totalPages != null && b.pagesRead < b.totalPages);
+      if (nextBook) {
+        logPages(nextBook.index, overflow);
+        return; // logPages will call render()
+      }
+    }
+
     render();
   }
 
@@ -2379,11 +2421,11 @@ footer h2 {
     if (todayEntries.length === 0) return;
     if (!confirm(`Undo ${todayEntries.length} log entries from today?`)) return;
 
-    // Subtract today's pages from each book, never going below baseline
+    // Subtract today's pages from each book, never going below the default baseline
     for (const entry of todayEntries) {
       const book = books.find(b => b.title === entry.title);
       if (book) {
-        const floor = targetBaseline[book.title] ?? 0;
+        const floor = DEFAULT_BASELINE[book.title] ?? targetBaseline[book.title] ?? 0;
         book.pagesRead = Math.max(floor, (book.pagesRead || 0) - entry.pages);
       }
     }
