@@ -3,7 +3,7 @@
     {
       "title": "Nausea",
       "author": "Jean-Paul Sartre",
-      "pagesRead": 51,
+      "pagesRead": 26,
       "totalPages": 138,
       "difficulty": 6
     },
@@ -150,11 +150,5 @@
     12,
     10
   ],
-  "readingLog": [
-    {
-      "date": "2026-03-16",
-      "title": "Nausea",
-      "pages": 25
-    }
-  ]
+  "readingLog": []
 }
