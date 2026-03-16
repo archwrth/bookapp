@@ -1295,21 +1295,26 @@ footer h2 {
     }
   }
 
-  async function init() {
-    loadFromLocalStorage();
-
-    // Try loading from GitHub if sync is configured
+  async function pullFromGitHub() {
     const ghData = await loadFromGitHub();
     if (ghData && ghData.books) {
       books = ghData.books;
       if (ghData.bookOrder) bookOrder = ghData.bookOrder;
       if (ghData.readingLog) readingLog = ghData.readingLog;
-      // Save to localStorage as cache
       localStorage.setItem(LS_BOOKS, JSON.stringify(books));
       localStorage.setItem(LS_ORDER, JSON.stringify(bookOrder));
       localStorage.setItem(LS_LOG, JSON.stringify(readingLog));
       updateSyncIndicator('synced', 'Loaded from GitHub');
+      return true;
     }
+    return false;
+  }
+
+  async function init() {
+    loadFromLocalStorage();
+
+    // Always try to pull latest from GitHub on load
+    const pulled = await pullFromGitHub();
 
     // Reset stale data (from before difficulty scores were added)
     const allNullDifficulty = books.length > 0 && books.every(b => b.difficulty == null);
@@ -1327,7 +1332,7 @@ footer h2 {
     }
 
     // Update sync indicator state
-    if (!ghData && getSyncConfig()) {
+    if (!pulled && getSyncConfig()) {
       updateSyncIndicator('error', 'Could not reach GitHub');
     } else if (!getSyncConfig()) {
       updateSyncIndicator('not-setup', 'Click to configure GitHub sync');
@@ -1335,6 +1340,14 @@ footer h2 {
 
     updateSoundButton();
     render();
+
+    // Re-pull from GitHub when page becomes visible again (tab switch, phone resume)
+    document.addEventListener('visibilitychange', async () => {
+      if (document.visibilityState === 'visible' && getSyncConfig()) {
+        const refreshed = await pullFromGitHub();
+        if (refreshed) render();
+      }
+    });
   }
 
   // --- Algorithm ---
