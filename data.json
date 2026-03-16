@@ -3,14 +3,14 @@
     {
       "title": "Nausea",
       "author": "Jean-Paul Sartre",
-      "pagesRead": 138,
+      "pagesRead": 26,
       "totalPages": 138,
       "difficulty": 6
     },
     {
       "title": "The Soundscape",
       "author": "R. Murray Schafer",
-      "pagesRead": 264,
+      "pagesRead": 14,
       "totalPages": 264,
       "difficulty": 7
     },
@@ -95,14 +95,14 @@
     {
       "title": "The Mountains Sing",
       "author": "Nguyễn Phan Quế Mai",
-      "pagesRead": 342,
+      "pagesRead": 0,
       "totalPages": 342,
       "difficulty": 4
     },
     {
       "title": "9 Out of 10 Climbers Make the Same Mistakes",
       "author": "Dave MacLeod",
-      "pagesRead": 146,
+      "pagesRead": 0,
       "totalPages": 164,
       "difficulty": 3
     },
@@ -151,108 +151,7 @@
     12,
     10
   ],
-  "readingLog": [
-    {
-      "date": "2026-03-16",
-      "title": "Nausea",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Nausea",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Nausea",
-      "pages": 12
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 38
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 12
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 38
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 4
-    },
-    {
-      "date": "2026-03-16",
-      "title": "9 Out of 10 Climbers Make the Same Mistakes",
-      "pages": 46
-    },
-    {
-      "date": "2026-03-16",
-      "title": "9 Out of 10 Climbers Make the Same Mistakes",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "9 Out of 10 Climbers Make the Same Mistakes",
-      "pages": 50
-    }
-  ],
+  "readingLog": [],
   "dailyTargets": {
     "Nausea": 14,
     "The Soundscape": 13,
