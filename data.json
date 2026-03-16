@@ -3,14 +3,14 @@
     {
       "title": "Nausea",
       "author": "Jean-Paul Sartre",
-      "pagesRead": 138,
+      "pagesRead": 0,
       "totalPages": 138,
       "difficulty": 6
     },
     {
       "title": "The Soundscape",
       "author": "R. Murray Schafer",
-      "pagesRead": 264,
+      "pagesRead": 14,
       "totalPages": 264,
       "difficulty": 7
     },
@@ -80,7 +80,7 @@
     {
       "title": "Lolita",
       "author": "Vladimir Nabokov",
-      "pagesRead": 317,
+      "pagesRead": 0,
       "totalPages": 317,
       "difficulty": 6,
       "estimatedPages": true
@@ -95,21 +95,21 @@
     {
       "title": "The Mountains Sing",
       "author": "Nguyễn Phan Quế Mai",
-      "pagesRead": 342,
+      "pagesRead": 0,
       "totalPages": 342,
       "difficulty": 4
     },
     {
       "title": "9 Out of 10 Climbers Make the Same Mistakes",
       "author": "Dave MacLeod",
-      "pagesRead": 164,
+      "pagesRead": 0,
       "totalPages": 164,
       "difficulty": 3
     },
     {
       "title": "Eichmann in Jerusalem",
       "author": "Hannah Arendt",
-      "pagesRead": 50,
+      "pagesRead": 0,
       "totalPages": 312,
       "difficulty": 7,
       "estimatedPages": true
@@ -117,7 +117,7 @@
     {
       "title": "Down and Out in Paris and London",
       "author": "George Orwell",
-      "pagesRead": 228,
+      "pagesRead": 0,
       "totalPages": 228,
       "difficulty": 3,
       "estimatedPages": true
@@ -151,168 +151,7 @@
     12,
     10
   ],
-  "readingLog": [
-    {
-      "date": "2026-03-16",
-      "title": "Nausea",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Nausea",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Nausea",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Soundscape",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "The Mountains Sing",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "9 Out of 10 Climbers Make the Same Mistakes",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "9 Out of 10 Climbers Make the Same Mistakes",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "9 Out of 10 Climbers Make the Same Mistakes",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "9 Out of 10 Climbers Make the Same Mistakes",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Lolita",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Lolita",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Lolita",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Lolita",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Lolita",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Lolita",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Lolita",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Down and Out in Paris and London",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Down and Out in Paris and London",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Down and Out in Paris and London",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Down and Out in Paris and London",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Down and Out in Paris and London",
-      "pages": 50
-    },
-    {
-      "date": "2026-03-16",
-      "title": "Eichmann in Jerusalem",
-      "pages": 50
-    }
-  ],
+  "readingLog": [],
   "dailyTargets": {
     "Eichmann in Jerusalem": 9,
     "Psychotherapy East & West": 9,
