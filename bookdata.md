@@ -1,0 +1,18 @@
+- Nausea - Jean-Paul Sartre - 54 pages already read - 138 pages total
+- The Soundscape - R. Murray Schafer - 18 pages already read - 264 pages total
+- Psychotherapy East & West - Alan W. Watts - 59 pages already read - 205 pages total
+- Ghosts of My Life - Mark Fisher - 49 pages already read - 267 pages total
+- The Birth of Tragedy - Friedrich Nietzsche - 4 pages already read - 142 pages total
+- Fear and Trembling - Søren Kierkegaard - 0 pages already read - 141 pages total
+- Wherever You Go, There You Are - Jon Kabat-Zinn - 0 pages already read - 299 pages total
+- Oneness vs The 1% - Vandana Shiva - 0 pages already read - 173 pages total
+- The Patterning Instinct - Jeremy Lent - 160 pages already read - 430 pages total
+- The Name of the Rose - Umberto Eco - 0 pages already read - 576 pages total
+- Caliban and the Witch - Silvia Federici - 0 pages already read - 268 pages total
+- Lolita - Vladimir Nabokov - 0 pages already read - X pages total
+- She Comes First - Ian Kerner - 0 pages already read - 205 pages total
+- The Mountains Sing - Nguyễn Phan Quế Mai - 0 pages already read - 342 pages total
+- 9 Out of 10 Climbers Make the Same Mistakes - Dave MacLeod - 0 pages already read - 164 pages total
+- Eichmann in Jerusalem - Hannah Arendt - 0 pages already read - X pages total
+- Down and Out in Paris and London - George Orwell - 0 pages already read - X pages total
+- The Fire Next Time - James Baldwin - 0 pages already read - X pages total

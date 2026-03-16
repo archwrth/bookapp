@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading Quest 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1a1a2e;
+  --card-bg: #16213e;
+  --border: #e2e2e2;
+  --gold: #f6c90e;
+  --green: #4ecca3;
+  --red: #e74c3c;
+  --text: #e2e2e2;
+  --text-dim: #8a8a9a;
+  --pixel-size: 3px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.pixel-border {
+  box-shadow:
+    var(--pixel-size) 0 0 0 var(--border),
+    calc(-1 * var(--pixel-size)) 0 0 0 var(--border),
+    0 var(--pixel-size) 0 0 var(--border),
+    0 calc(-1 * var(--pixel-size)) 0 0 var(--border);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 24px 16px;
+  margin-bottom: 16px;
+}
+
+header h1 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(14px, 4vw, 24px);
+  color: var(--gold);
+  text-shadow: 3px 3px 0 #c9a005;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.header-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.stat-box {
+  background: var(--card-bg);
+  padding: 10px 16px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.stat-box .stat-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.stat-box .stat-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--gold);
+}
+
+.overall-progress {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.overall-progress .progress-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.progress-bar-outer {
+  background: #0a0a1a;
+  height: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-inner {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red), var(--gold), var(--green));
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.progress-bar-inner::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 8px,
+    rgba(0,0,0,0.15) 8px,
+    rgba(0,0,0,0.15) 10px
+  );
+}
+
+.progress-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--text);
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* WARNING BANNER */
+.warning-banner {
+  background: #2a1a0a;
+  border-left: 4px solid var(--red);
+  padding: 16px;
+  margin-bottom: 16px;
+  animation: pulse-border 2s infinite;
+}
+
+.warning-banner h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+
+.warning-banner ul {
+  list-style: none;
+  padding-left: 8px;
+}
+
+.warning-banner li {
+  font-size: 12px;
+  padding: 2px 0;
+  color: var(--gold);
+}
+
+.warning-banner li::before {
+  content: '⚠ ';
+}
+
+@keyframes pulse-border {
+  0%, 100% { border-left-color: var(--red); }
+  50% { border-left-color: var(--gold); }
+}
+
+.hidden { display: none !important; }
+
+/* TOOLBAR */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+.pixel-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+  color: var(--bg);
+  background: var(--text);
+  transition: transform 0.1s;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pixel-btn:hover { transform: scale(1.05); }
+.pixel-btn:active { transform: scale(0.95); }
+.pixel-btn.gold { background: var(--gold); color: var(--bg); }
+.pixel-btn.green { background: var(--green); color: var(--bg); }
+.pixel-btn.red { background: var(--red); color: #fff; }
+.pixel-btn.active { background: var(--gold); color: var(--bg); }
+.pixel-btn.small { font-size: 8px; padding: 8px 12px; min-height: 36px; }
+
+/* BOOK LIST */
+.book-list {
+  display: grid;
+  gap: 12px;
+}
+
+.book-card {
+  background: var(--card-bg);
+  padding: 16px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+}
+
+.book-card:hover {
+  transform: translateX(4px);
+  box-shadow:
+    var(--pixel-size) 0 0 0 var(--gold),
+    calc(-1 * var(--pixel-size)) 0 0 0 var(--gold),
+    0 var(--pixel-size) 0 0 var(--gold),
+    0 calc(-1 * var(--pixel-size)) 0 0 var(--gold);
+}
+
+.book-card.completed {
+  opacity: 0.6;
+}
+
+.book-card.completed .book-title::after {
+  content: ' ✓';
+  color: var(--green);
+}
+
+.book-card.dragging {
+  opacity: 0.4;
+}
+
+.book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.book-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.book-author {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.difficulty-badge {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 4px 8px;
+  background: var(--bg);
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.book-progress {
+  margin-bottom: 6px;
+}
+
+.book-progress-bar {
+  background: #0a0a1a;
+  height: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.book-progress-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.book-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 6px,
+    rgba(0,0,0,0.2) 6px,
+    rgba(0,0,0,0.2) 8px
+  );
+}
+
+.book-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-dim);
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.daily-target {
+  color: var(--green);
+  font-weight: bold;
+}
+
+.daily-target.no-target {
+  color: var(--text-dim);
+}
+
+/* LOG MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+}
+
+.modal {
+  background: var(--card-bg);
+  padding: 24px;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+}
+
+.modal h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  margin-bottom: 4px;
+  line-height: 1.6;
+}
+
+.modal .modal-author {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.modal .current-progress {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.quick-add-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.custom-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.custom-input-row input {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  width: 100px;
+  min-height: 44px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px; right: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover { color: var(--red); }
+
+/* SPARKLE ANIMATION */
+@keyframes sparkle {
+  0% { opacity: 1; transform: scale(1) translateY(0); }
+  100% { opacity: 0; transform: scale(1.5) translateY(-30px); }
+}
+
+.sparkle-container {
+  position: fixed;
+  pointer-events: none;
+  z-index: 200;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 16px;
+  animation: sparkle 0.8s ease-out forwards;
+}
+
+/* LEVEL UP */
+@keyframes levelup {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.2); }
+  100% { opacity: 0; transform: translateY(-40px) scale(0.8); }
+}
+
+.levelup-text {
+  position: fixed;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: var(--gold);
+  pointer-events: none;
+  z-index: 200;
+  animation: levelup 1.2s ease-out forwards;
+  text-shadow: 2px 2px 0 var(--bg);
+}
+
+/* EDIT MODE */
+.edit-fields {
+  display: none;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px dashed var(--text-dim);
+}
+
+.edit-mode .edit-fields { display: block; }
+
+.edit-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.edit-row label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--text-dim);
+  min-width: 90px;
+}
+
+.edit-row input {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 6px 10px;
+  width: 80px;
+  min-height: 36px;
+}
+
+.edit-row input.wide { width: 100%; max-width: 300px; }
+
+.edit-mode .book-card { cursor: default; }
+
+.book-card-wrapper .book-card { flex: 1; }
+
+.remove-book-btn {
+  display: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-top: 8px;
+}
+
+.edit-mode .remove-book-btn { display: inline-block; }
+
+/* ADD BOOK */
+.add-book-section {
+  display: none;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: var(--card-bg);
+}
+
+.add-book-section.visible { display: block; }
+
+.add-book-section h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+
+.add-book-form {
+  display: grid;
+  gap: 8px;
+}
+
+.add-book-form input {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  min-height: 44px;
+}
+
+/* STATS FOOTER */
+footer {
+  margin-top: 24px;
+  padding: 20px 16px;
+  text-align: center;
+  border-top: 2px solid var(--text-dim);
+}
+
+footer h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.footer-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.footer-stat {
+  text-align: center;
+}
+
+.footer-stat .fs-value {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px;
+  color: var(--green);
+}
+
+.footer-stat .fs-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* SOUND TOGGLE */
+.sound-toggle {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  z-index: 50;
+}
+
+/* REROLL ANIMATION */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.reroll-spin {
+  display: inline-block;
+  animation: spin 0.5s ease-in-out;
+}
+
+/* ESTIMATES NOTICE */
+.estimates-notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  background: #1e1e3a;
+  border-left: 4px solid var(--gold);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.estimates-notice strong {
+  color: var(--gold);
+}
+
+.estimates-notice .en-text {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* READING NOW */
+.reading-now {
+  margin-bottom: 20px;
+}
+
+.reading-now h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--green);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reading-now h2 .blink-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--green);
+  animation: blink 1.2s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.rn-card {
+  background: var(--card-bg);
+  padding: 16px;
+  margin-bottom: 10px;
+  border-left: 4px solid var(--green);
+}
+
+.rn-card .rn-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.rn-card .rn-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.rn-card .rn-author {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.rn-card .rn-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.rn-card .rn-progress-row .rn-bar {
+  flex: 1;
+  background: #0a0a1a;
+  height: 10px;
+  overflow: hidden;
+}
+
+.rn-card .rn-progress-row .rn-bar-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.rn-card .rn-target {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.rn-card .rn-quick-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ORDER MODE — compact rows for easy drag & drop */
+.order-mode-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--bg);
+  z-index: 90;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.order-mode-overlay h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.order-mode-overlay .order-hint {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.order-list {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-bg);
+  padding: 8px 12px;
+  cursor: grab;
+  min-height: 40px;
+  user-select: none;
+  transition: transform 0.1s, background 0.1s;
+}
+
+.order-item:active { cursor: grabbing; }
+
+.order-item:hover { background: #1e2a4a; }
+
+.order-item.drag-over {
+  border-top: 3px solid var(--gold);
+}
+
+.order-item.dragging {
+  opacity: 0.3;
+}
+
+.order-item.completed {
+  opacity: 0.5;
+}
+
+.order-item .order-num {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--text-dim);
+  min-width: 28px;
+  text-align: center;
+}
+
+.order-item .order-num.current {
+  color: var(--green);
+}
+
+.order-item .order-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--text);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-item.completed .order-title {
+  text-decoration: line-through;
+  color: var(--text-dim);
+}
+
+.order-item .order-pct {
+  font-size: 10px;
+  color: var(--text-dim);
+  min-width: 40px;
+  text-align: right;
+}
+
+.order-item .order-handle {
+  font-size: 16px;
+  color: var(--text-dim);
+  min-width: 24px;
+  text-align: center;
+}
+
+.order-mode-btns {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.queue-badge {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: var(--green);
+  margin-top: 6px;
+}
+
+/* SYNC STATUS */
+.sync-indicator {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  padding: 4px 8px;
+  z-index: 50;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.sync-indicator.synced { color: var(--green); opacity: 0.5; }
+.sync-indicator.syncing { color: var(--gold); opacity: 1; }
+.sync-indicator.error { color: var(--red); opacity: 1; }
+.sync-indicator.not-setup { color: var(--text-dim); opacity: 0.5; }
+
+.sync-setup {
+  background: var(--card-bg);
+  padding: 20px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.sync-setup h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.sync-setup p {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.sync-setup input {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  width: 100%;
+  min-height: 44px;
+  margin-bottom: 8px;
+}
+
+.sync-setup .sync-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .container { padding: 8px; }
+  header { padding: 16px 8px; }
+  .book-title { font-size: 9px; }
+  .stat-box { min-width: 100px; }
+  .stat-box .stat-value { font-size: 12px; }
+  .modal { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>READING QUEST 2026</h1>
+    <div class="header-stats">
+      <div class="stat-box pixel-border">
+        <div class="stat-label">Days Left</div>
+        <div class="stat-value" id="days-left">—</div>
+      </div>
+      <div class="stat-box pixel-border">
+        <div class="stat-label">XP</div>
+        <div class="stat-value" id="xp-count">0</div>
+      </div>
+      <div class="stat-box pixel-border">
+        <div class="stat-label">Books Done</div>
+        <div class="stat-value" id="books-done">0/0</div>
+      </div>
+    </div>
+    <div class="overall-progress">
+      <div class="progress-label">OVERALL PROGRESS</div>
+      <div class="progress-bar-outer pixel-border">
+        <div class="progress-bar-inner" id="overall-bar" style="width: 0%"></div>
+      </div>
+      <div class="progress-text" id="overall-text">0 / 0 pages</div>
+    </div>
+  </header>
+
+  <div class="warning-banner pixel-border hidden" id="warning-banner">
+    <h3>⚠ DATA INCOMPLETE</h3>
+    <ul id="warning-list"></ul>
+  </div>
+
+  <div class="estimates-notice pixel-border hidden" id="estimates-notice">
+    <span class="en-text">Page counts estimated for: <strong id="estimates-list"></strong></span>
+    <button class="pixel-btn small" id="btn-fix-estimates">Update</button>
+  </div>
+
+  <div class="reading-now" id="reading-now"></div>
+
+  <div class="toolbar">
+    <button class="pixel-btn gold" id="btn-reroll" title="Recalculate daily targets">↻ Calculate Targets</button>
+    <button class="pixel-btn" id="btn-order" title="Set reading order">⇅ Order</button>
+    <button class="pixel-btn" id="btn-edit" title="Toggle edit mode">✎ Edit</button>
+    <button class="pixel-btn green hidden" id="btn-add-book" title="Add a new book">+ Add Book</button>
+    <button class="pixel-btn green hidden" id="btn-save" title="Save changes">✓ Save</button>
+  </div>
+
+  <div class="add-book-section pixel-border" id="add-book-section">
+    <h3>+ NEW BOOK</h3>
+    <div class="add-book-form">
+      <input type="text" id="new-title" placeholder="Title">
+      <input type="text" id="new-author" placeholder="Author">
+      <input type="number" id="new-pages" placeholder="Total Pages" min="1">
+      <input type="number" id="new-difficulty" placeholder="Difficulty (1-10)" min="1" max="10">
+      <button class="pixel-btn green" id="btn-confirm-add">Add Book</button>
+    </div>
+  </div>
+
+  <div class="book-list" id="book-list"></div>
+
+  <footer>
+    <h2>— STATS —</h2>
+    <div class="footer-stats">
+      <div class="footer-stat">
+        <div class="fs-value" id="stat-completed">0/0</div>
+        <div class="fs-label">Books Done</div>
+      </div>
+      <div class="footer-stat">
+        <div class="fs-value" id="stat-pages">0</div>
+        <div class="fs-label">Pages Read</div>
+      </div>
+      <div class="footer-stat">
+        <div class="fs-value" id="stat-avg">0</div>
+        <div class="fs-label">Avg Pages/Day</div>
+      </div>
+      <div class="footer-stat">
+        <div class="fs-value" id="stat-streak">0</div>
+        <div class="fs-label">Day Streak</div>
+      </div>
+      <div class="footer-stat hidden" id="stat-finish-wrapper">
+        <div class="fs-value" id="stat-finish">—</div>
+        <div class="fs-label">Est. Finish</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div class="sync-indicator not-setup" id="sync-indicator" title="Click to configure GitHub sync">⟳ sync</div>
+<button class="pixel-btn small sound-toggle" id="btn-sound" title="Toggle sounds">♪</button>
+
+<!-- Sync Setup Modal -->
+<div class="modal-overlay hidden" id="sync-modal">
+  <div class="sync-setup pixel-border">
+    <h3>GITHUB SYNC SETUP</h3>
+    <p>Auto-saves your progress to books.json in your GitHub repo. One-time setup.</p>
+    <p>Create a classic token at GitHub → Settings → Developer Settings → Personal Access Tokens → Tokens (classic). Tick the <strong>repo</strong> scope. Copy the token — it starts with <strong>ghp_</strong></p>
+    <label style="font-size:10px;color:var(--text-dim);margin-bottom:4px;display:block">GitHub username</label>
+    <input type="text" id="sync-owner" placeholder="archwrth">
+    <label style="font-size:10px;color:var(--text-dim);margin-bottom:4px;display:block">Repository name</label>
+    <input type="text" id="sync-repo" placeholder="bookapp">
+    <label style="font-size:10px;color:var(--text-dim);margin-bottom:4px;display:block">Personal access token (classic)</label>
+    <input type="password" id="sync-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+    <div class="sync-btns">
+      <button class="pixel-btn green" id="btn-sync-save">Save & Test</button>
+      <button class="pixel-btn" id="btn-sync-cancel">Cancel</button>
+      <button class="pixel-btn red hidden" id="btn-sync-clear">Disconnect</button>
+    </div>
+  </div>
+</div>
+
+<div class="order-mode-overlay hidden" id="order-overlay">
+  <h2>READING ORDER</h2>
+  <div class="order-hint">Drag to reorder. Top book = reading next.</div>
+  <div class="order-list" id="order-list"></div>
+  <div class="order-mode-btns">
+    <button class="pixel-btn green" id="btn-order-done">✓ Done</button>
+  </div>
+</div>
+
+<!-- Log Modal -->
+<div class="modal-overlay hidden" id="log-modal">
+  <div class="modal pixel-border">
+    <button class="modal-close" id="modal-close">✕</button>
+    <h3 id="modal-title"></h3>
+    <div class="modal-author" id="modal-author"></div>
+    <div class="current-progress" id="modal-progress"></div>
+    <div class="quick-add-buttons">
+      <button class="pixel-btn small gold" data-pages="5">+5</button>
+      <button class="pixel-btn small gold" data-pages="10">+10</button>
+      <button class="pixel-btn small gold" data-pages="25">+25</button>
+      <button class="pixel-btn small gold" data-pages="50">+50</button>
+    </div>
+    <div class="custom-input-row">
+      <input type="number" id="custom-pages" placeholder="Custom" min="1">
+      <button class="pixel-btn small green" id="btn-custom-add">Add</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const DEADLINE = new Date(2026, 11, 31); // Dec 31, 2026
+  const LS_BOOKS = 'rq_books';
+  const LS_ORDER = 'rq_order';
+  const LS_LOG = 'rq_log';
+  const LS_SOUND = 'rq_sound';
+
+  const DEFAULT_BOOKS = [
+    {"title":"Nausea","author":"Jean-Paul Sartre","pagesRead":54,"totalPages":138,"difficulty":6},
+    {"title":"The Soundscape","author":"R. Murray Schafer","pagesRead":18,"totalPages":264,"difficulty":7},
+    {"title":"Psychotherapy East & West","author":"Alan W. Watts","pagesRead":59,"totalPages":205,"difficulty":7},
+    {"title":"Ghosts of My Life","author":"Mark Fisher","pagesRead":49,"totalPages":267,"difficulty":6},
+    {"title":"The Birth of Tragedy","author":"Friedrich Nietzsche","pagesRead":4,"totalPages":142,"difficulty":9},
+    {"title":"Fear and Trembling","author":"Søren Kierkegaard","pagesRead":0,"totalPages":141,"difficulty":8},
+    {"title":"Wherever You Go, There You Are","author":"Jon Kabat-Zinn","pagesRead":0,"totalPages":299,"difficulty":3},
+    {"title":"Oneness vs The 1%","author":"Vandana Shiva","pagesRead":0,"totalPages":173,"difficulty":5},
+    {"title":"The Patterning Instinct","author":"Jeremy Lent","pagesRead":160,"totalPages":430,"difficulty":6},
+    {"title":"The Name of the Rose","author":"Umberto Eco","pagesRead":0,"totalPages":576,"difficulty":7},
+    {"title":"Caliban and the Witch","author":"Silvia Federici","pagesRead":0,"totalPages":268,"difficulty":7},
+    {"title":"Lolita","author":"Vladimir Nabokov","pagesRead":0,"totalPages":317,"difficulty":6,"estimatedPages":true},
+    {"title":"She Comes First","author":"Ian Kerner","pagesRead":0,"totalPages":205,"difficulty":2},
+    {"title":"The Mountains Sing","author":"Nguyễn Phan Quế Mai","pagesRead":0,"totalPages":342,"difficulty":4},
+    {"title":"9 Out of 10 Climbers Make the Same Mistakes","author":"Dave MacLeod","pagesRead":0,"totalPages":164,"difficulty":3},
+    {"title":"Eichmann in Jerusalem","author":"Hannah Arendt","pagesRead":0,"totalPages":312,"difficulty":7,"estimatedPages":true},
+    {"title":"Down and Out in Paris and London","author":"George Orwell","pagesRead":0,"totalPages":228,"difficulty":3,"estimatedPages":true},
+    {"title":"The Fire Next Time","author":"James Baldwin","pagesRead":0,"totalPages":106,"difficulty":4,"estimatedPages":true}
+  ];
+
+  let books = [];
+  let bookOrder = [];
+  let readingLog = [];
+  let editMode = false;
+  let soundEnabled = JSON.parse(localStorage.getItem(LS_SOUND) ?? 'true');
+  let dailyTargets = {};
+  let dailyTargetCheck = null;
+
+  // --- Audio ---
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  function playBeep(freq = 800, duration = 0.08) {
+    if (!soundEnabled) return;
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'square';
+      osc.frequency.value = freq;
+      gain.gain.value = 0.08;
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.stop(audioCtx.currentTime + duration);
+    } catch(e) {}
+  }
+
+  function playLevelUp() {
+    if (!soundEnabled) return;
+    [523, 659, 784, 1047].forEach((f, i) => {
+      setTimeout(() => playBeep(f, 0.12), i * 100);
+    });
+  }
+
+  // --- Data ---
+  function loadFromLocalStorage() {
+    try {
+      const saved = localStorage.getItem(LS_BOOKS);
+      if (saved) books = JSON.parse(saved);
+      const order = localStorage.getItem(LS_ORDER);
+      if (order) bookOrder = JSON.parse(order);
+      const log = localStorage.getItem(LS_LOG);
+      if (log) readingLog = JSON.parse(log);
+    } catch(e) {
+      console.error('Failed to load localStorage', e);
+    }
+  }
+
+  function saveBooks() {
+    localStorage.setItem(LS_BOOKS, JSON.stringify(books));
+    scheduleSyncToGitHub();
+  }
+
+  function saveOrder() {
+    localStorage.setItem(LS_ORDER, JSON.stringify(bookOrder));
+    scheduleSyncToGitHub();
+  }
+
+  function saveLog() {
+    localStorage.setItem(LS_LOG, JSON.stringify(readingLog));
+    scheduleSyncToGitHub();
+  }
+
+  // --- GitHub Sync ---
+  const LS_SYNC = 'rq_sync'; // { owner, repo, token }
+  let syncTimer = null;
+
+  function getSyncConfig() {
+    try {
+      return JSON.parse(localStorage.getItem(LS_SYNC));
+    } catch(e) { return null; }
+  }
+
+  function updateSyncIndicator(state, msg) {
+    const el = document.getElementById('sync-indicator');
+    el.className = 'sync-indicator ' + state;
+    el.title = msg || state;
+    if (state === 'synced') {
+      el.textContent = '✓ synced';
+      setTimeout(() => { el.textContent = '⟳ sync'; }, 2000);
+    } else if (state === 'syncing') {
+      el.textContent = '⟳ saving...';
+    } else if (state === 'error') {
+      el.textContent = '✕ error';
+    } else {
+      el.textContent = '⟳ sync';
+    }
+  }
+
+  function scheduleSyncToGitHub() {
+    // Debounce: wait 2s after last change before syncing
+    if (syncTimer) clearTimeout(syncTimer);
+    const config = getSyncConfig();
+    if (!config) return;
+    syncTimer = setTimeout(() => syncToGitHub(), 2000);
+  }
+
+  async function syncToGitHub() {
+    const config = getSyncConfig();
+    if (!config || !config.token || !config.owner || !config.repo) return;
+
+    updateSyncIndicator('syncing');
+
+    try {
+      // Build the full state to save
+      const state = {
+        books: books,
+        bookOrder: bookOrder,
+        readingLog: readingLog
+      };
+
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(state, null, 2))));
+      const path = 'data.json';
+
+      // Get current file SHA (needed for updates)
+      let sha = null;
+      try {
+        const getResp = await fetch(
+          `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${path}`,
+          { headers: { 'Authorization': `Bearer ${config.token}` } }
+        );
+        if (getResp.ok) {
+          const getBody = await getResp.json();
+          sha = getBody.sha;
+        }
+      } catch(e) {}
+
+      const body = {
+        message: `Update reading progress - ${new Date().toLocaleDateString()}`,
+        content: content,
+        ...(sha ? { sha } : {})
+      };
+
+      const putResp = await fetch(
+        `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${path}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${config.token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        }
+      );
+
+      if (putResp.ok) {
+        updateSyncIndicator('synced', 'Last synced: ' + new Date().toLocaleTimeString());
+      } else {
+        const err = await putResp.json();
+        console.error('GitHub sync failed:', err);
+        updateSyncIndicator('error', 'Sync failed: ' + (err.message || putResp.status));
+      }
+    } catch(e) {
+      console.error('GitHub sync error:', e);
+      updateSyncIndicator('error', 'Sync failed: ' + e.message);
+    }
+  }
+
+  async function loadFromGitHub() {
+    const config = getSyncConfig();
+    if (!config || !config.token) return null;
+
+    try {
+      const resp = await fetch(
+        `https://api.github.com/repos/${config.owner}/${config.repo}/contents/data.json`,
+        { headers: { 'Authorization': `Bearer ${config.token}` } }
+      );
+      if (!resp.ok) return null;
+      const body = await resp.json();
+      const decoded = decodeURIComponent(escape(atob(body.content)));
+      return JSON.parse(decoded);
+    } catch(e) {
+      console.warn('Could not load from GitHub:', e);
+      return null;
+    }
+  }
+
+  function openSyncSetup() {
+    const modal = document.getElementById('sync-modal');
+    modal.classList.remove('hidden');
+    const config = getSyncConfig();
+    if (config) {
+      document.getElementById('sync-owner').value = config.owner || '';
+      document.getElementById('sync-repo').value = config.repo || '';
+      document.getElementById('sync-token').value = config.token || '';
+      document.getElementById('btn-sync-clear').classList.remove('hidden');
+    } else {
+      document.getElementById('btn-sync-clear').classList.add('hidden');
+    }
+  }
+
+  function closeSyncSetup() {
+    document.getElementById('sync-modal').classList.add('hidden');
+  }
+
+  async function saveSyncConfig() {
+    const owner = document.getElementById('sync-owner').value.trim();
+    const repo = document.getElementById('sync-repo').value.trim();
+    const token = document.getElementById('sync-token').value.trim();
+
+    if (!owner || !repo || !token) return;
+
+    localStorage.setItem(LS_SYNC, JSON.stringify({ owner, repo, token }));
+    updateSyncIndicator('syncing', 'Testing connection...');
+
+    // Test by doing a sync
+    await syncToGitHub();
+
+    const el = document.getElementById('sync-indicator');
+    if (el.classList.contains('error')) {
+      // Don't close, let user fix
+    } else {
+      closeSyncSetup();
+    }
+  }
+
+  function clearSyncConfig() {
+    if (!confirm('Disconnect GitHub sync?')) return;
+    localStorage.removeItem(LS_SYNC);
+    updateSyncIndicator('not-setup', 'Click to configure GitHub sync');
+    closeSyncSetup();
+  }
+
+  async function loadBooksJson() {
+    try {
+      const resp = await fetch('books.json');
+      if (!resp.ok) throw new Error('Failed to fetch books.json');
+      const data = await resp.json();
+      return data;
+    } catch(e) {
+      console.warn('Could not load books.json, using localStorage only', e);
+      return null;
+    }
+  }
+
+  async function init() {
+    loadFromLocalStorage();
+
+    // Try loading from GitHub if sync is configured
+    const ghData = await loadFromGitHub();
+    if (ghData && ghData.books) {
+      books = ghData.books;
+      if (ghData.bookOrder) bookOrder = ghData.bookOrder;
+      if (ghData.readingLog) readingLog = ghData.readingLog;
+      // Save to localStorage as cache
+      localStorage.setItem(LS_BOOKS, JSON.stringify(books));
+      localStorage.setItem(LS_ORDER, JSON.stringify(bookOrder));
+      localStorage.setItem(LS_LOG, JSON.stringify(readingLog));
+      updateSyncIndicator('synced', 'Loaded from GitHub');
+    }
+
+    // Reset stale data (from before difficulty scores were added)
+    const allNullDifficulty = books.length > 0 && books.every(b => b.difficulty == null);
+
+    if (books.length === 0 || allNullDifficulty) {
+      const jsonBooks = await loadBooksJson();
+      books = jsonBooks || DEFAULT_BOOKS;
+      localStorage.setItem(LS_BOOKS, JSON.stringify(books));
+    }
+
+    // Initialize order if needed
+    if (bookOrder.length === 0 || bookOrder.length !== books.length) {
+      bookOrder = books.map((_, i) => i);
+      localStorage.setItem(LS_ORDER, JSON.stringify(bookOrder));
+    }
+
+    // Update sync indicator state
+    if (!ghData && getSyncConfig()) {
+      updateSyncIndicator('error', 'Could not reach GitHub');
+    } else if (!getSyncConfig()) {
+      updateSyncIndicator('not-setup', 'Click to configure GitHub sync');
+    }
+
+    updateSoundButton();
+    render();
+  }
+
+  // --- Algorithm ---
+  function getDaysLeft() {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const end = new Date(DEADLINE.getFullYear(), DEADLINE.getMonth(), DEADLINE.getDate());
+    const diff = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
+    return Math.max(diff, 1);
+  }
+
+  function calculateTargets() {
+    dailyTargets = {};
+    const daysLeft = getDaysLeft();
+
+    // Get active books in reading order
+    const activeBooks = bookOrder
+      .map(i => books[i])
+      .filter(b => b.totalPages != null && b.difficulty != null && b.pagesRead < b.totalPages);
+
+    if (activeBooks.length === 0) return;
+
+    // Sequential reading model: allocate days to each book proportionally
+    // by difficulty-weighted effort, then calculate pages/day per book.
+    //
+    // 1. Each book's "effort" = remaining pages × difficulty multiplier
+    //    Multiplier is compressed: maps difficulty 1→0.8, 5→1.0, 10→1.25
+    //    so the hardest book only gets ~1.5x the time of the easiest
+    // 2. Each book gets a share of total days proportional to its effort
+    // 3. Pages/day for that book = remaining pages / allocated days
+
+    const bookData = activeBooks.map(b => {
+      const remaining = b.totalPages - b.pagesRead;
+      const diffMultiplier = 1 + (b.difficulty - 5) * 0.1;
+      const effort = remaining * diffMultiplier;
+      return { book: b, remaining, diffMultiplier, effort };
+    });
+
+    const totalEffort = bookData.reduce((s, d) => s + d.effort, 0);
+
+    for (const d of bookData) {
+      const allocatedDays = Math.max(1, (d.effort / totalEffort) * daysLeft);
+      const pagesPerDay = d.remaining / allocatedDays;
+      dailyTargets[d.book.title] = Math.max(1, Math.round(pagesPerDay));
+    }
+
+    // Verification: check that targets actually finish all books in time.
+    // Each book takes ceil(remaining / target) days sequentially.
+    // If total exceeds deadline, bump the worst offenders up by 1.
+    let totalDaysNeeded = bookData.reduce((s, d) => {
+      return s + Math.ceil(d.remaining / dailyTargets[d.book.title]);
+    }, 0);
+
+    // Allow 2 days buffer — keep bumping until we fit
+    let safety = 0;
+    while (totalDaysNeeded > daysLeft + 2 && safety < 50) {
+      // Find the book where +1 page/day saves the most days
+      let bestSaving = 0;
+      let bestTitle = null;
+      for (const d of bookData) {
+        const current = dailyTargets[d.book.title];
+        const daysNow = Math.ceil(d.remaining / current);
+        const daysAfter = Math.ceil(d.remaining / (current + 1));
+        const saving = daysNow - daysAfter;
+        if (saving > bestSaving) {
+          bestSaving = saving;
+          bestTitle = d.book.title;
+        }
+      }
+      if (!bestTitle || bestSaving === 0) break;
+      dailyTargets[bestTitle]++;
+      totalDaysNeeded -= bestSaving;
+      safety++;
+    }
+
+    // Store the verification result for display
+    dailyTargetCheck = {
+      totalDaysNeeded,
+      daysLeft,
+      finishDate: new Date(Date.now() + totalDaysNeeded * 86400000)
+    };
+  }
+
+  // --- Rendering ---
+  function getProgressColor(pct) {
+    if (pct < 0.33) return `var(--red)`;
+    if (pct < 0.66) return `var(--gold)`;
+    return `var(--green)`;
+  }
+
+  function getProgressGradient(pct) {
+    if (pct >= 1) return 'var(--green)';
+    if (pct >= 0.66) return 'linear-gradient(90deg, var(--gold), var(--green))';
+    if (pct >= 0.33) return 'linear-gradient(90deg, var(--red), var(--gold))';
+    return 'var(--red)';
+  }
+
+  function render() {
+    const daysLeft = getDaysLeft();
+    const totalPages = books.reduce((s, b) => s + (b.totalPages || 0), 0);
+    const totalRead = books.reduce((s, b) => s + (b.pagesRead || 0), 0);
+    const completed = books.filter(b => b.totalPages != null && b.pagesRead >= b.totalPages).length;
+    const pct = totalPages > 0 ? (totalRead / totalPages) * 100 : 0;
+
+    // Header
+    document.getElementById('days-left').textContent = daysLeft;
+    document.getElementById('xp-count').textContent = totalRead.toLocaleString();
+    document.getElementById('books-done').textContent = `${completed}/${books.length}`;
+    document.getElementById('overall-bar').style.width = pct + '%';
+    document.getElementById('overall-text').textContent = `${totalRead.toLocaleString()} / ${totalPages.toLocaleString()} pages (${pct.toFixed(1)}%)`;
+
+    // Warning banner
+    const warnings = [];
+    for (const b of books) {
+      const issues = [];
+      if (b.totalPages == null) issues.push('missing page count');
+      if (b.difficulty == null) issues.push('missing difficulty');
+      if (issues.length > 0) warnings.push(`${b.title}: ${issues.join(', ')}`);
+    }
+    const banner = document.getElementById('warning-banner');
+    const warningList = document.getElementById('warning-list');
+    if (warnings.length > 0) {
+      banner.classList.remove('hidden');
+      warningList.innerHTML = warnings.map(w => `<li>${escapeHtml(w)}</li>`).join('');
+    } else {
+      banner.classList.add('hidden');
+    }
+
+    // Estimates notice
+    const estimatedBooks = books.filter(b => b.estimatedPages);
+    const estimatesEl = document.getElementById('estimates-notice');
+    if (estimatedBooks.length > 0) {
+      estimatesEl.classList.remove('hidden');
+      document.getElementById('estimates-list').textContent = estimatedBooks.map(b => b.title).join(', ');
+    } else {
+      estimatesEl.classList.add('hidden');
+    }
+
+    // Reading Now — first incomplete book in order
+    const rnContainer = document.getElementById('reading-now');
+    const currentBook = bookOrder
+      .map(i => ({ book: books[i], index: i }))
+      .find(({ book }) => book.totalPages != null && book.pagesRead < book.totalPages);
+
+    if (currentBook) {
+      const { book, index } = currentBook;
+      const bpct = book.totalPages ? Math.min(book.pagesRead / book.totalPages, 1) : 0;
+      const target = dailyTargets[book.title];
+      const todayLog = readingLog.filter(e => e.date === getDateStr(new Date()) && e.title === book.title);
+      const todayPages = todayLog.reduce((s, e) => s + e.pages, 0);
+      // Find "up next" book
+      const nextBook = bookOrder
+        .map(i => ({ book: books[i], index: i }))
+        .find(({ book: b }) => b.totalPages != null && b.pagesRead < b.totalPages && b.title !== book.title);
+
+      rnContainer.innerHTML = `
+        <h2><span class="blink-dot"></span> READING NOW</h2>
+        <div class="rn-card pixel-border">
+          <div class="rn-top">
+            <div>
+              <div class="rn-title">${escapeHtml(book.title)}</div>
+              <div class="rn-author">${escapeHtml(book.author)}</div>
+            </div>
+            ${book.difficulty != null ? `<div class="difficulty-badge pixel-border">LV.${book.difficulty}</div>` : ''}
+          </div>
+          <div class="rn-progress-row">
+            <div class="rn-bar pixel-border"><div class="rn-bar-fill" style="width:${(bpct*100).toFixed(1)}%;background:${getProgressGradient(bpct)}"></div></div>
+            <span>${book.pagesRead}/${book.totalPages ?? '?'}</span>
+          </div>
+          ${target ? `<div class="rn-target">Today's target: ${target} pages${todayPages > 0 ? ` (done: ${todayPages})` : ''}</div>` : ''}
+          <div class="rn-quick-btns">
+            <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="5">+5</button>
+            <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="10">+10</button>
+            <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="25">+25</button>
+            <button class="pixel-btn small gold" data-rn-idx="${index}" data-pages="50">+50</button>
+            <button class="pixel-btn small" data-rn-idx="${index}" data-pages="custom">other</button>
+          </div>
+          ${nextBook ? `<div class="queue-badge">UP NEXT: ${escapeHtml(nextBook.book.title)}</div>` : ''}
+        </div>`;
+    } else {
+      rnContainer.innerHTML = `
+        <h2><span class="blink-dot"></span> READING NOW</h2>
+        <div class="rn-card pixel-border" style="border-left-color:var(--gold)">
+          <div class="rn-title" style="color:var(--gold)">All books complete! ★</div>
+        </div>`;
+    }
+
+    // Reading Now quick-log listeners
+    rnContainer.querySelectorAll('.rn-quick-btns button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.rnIdx);
+        const pages = btn.dataset.pages;
+        if (pages === 'custom') {
+          openLogModal(idx);
+        } else {
+          logPages(idx, parseInt(pages));
+        }
+      });
+    });
+
+    // Book list
+    const list = document.getElementById('book-list');
+    list.innerHTML = '';
+
+    const orderedBooks = bookOrder.map(i => ({ book: books[i], index: i }));
+
+    let queueNum = 1;
+    for (const { book, index } of orderedBooks) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'book-card-wrapper';
+
+      const card = document.createElement('div');
+      const isComplete = book.totalPages != null && book.pagesRead >= book.totalPages;
+      card.className = 'book-card pixel-border' + (isComplete ? ' completed' : '');
+      card.dataset.bookIndex = index;
+
+      const bookPct = book.totalPages ? Math.min(book.pagesRead / book.totalPages, 1) : 0;
+      const target = dailyTargets[book.title];
+      const bookQueueNum = isComplete ? null : queueNum++;
+
+      card.innerHTML = `
+        <div class="book-header">
+          <div>
+            <div class="book-title">${bookQueueNum ? `<span style="color:var(--text-dim);font-size:8px">#${bookQueueNum}</span> ` : ''}${escapeHtml(book.title)}</div>
+            <div class="book-author">${escapeHtml(book.author)}</div>
+          </div>
+          ${book.difficulty != null ? `<div class="difficulty-badge pixel-border">LV.${book.difficulty}</div>` : ''}
+        </div>
+        <div class="book-progress">
+          <div class="book-progress-bar pixel-border">
+            <div class="book-progress-fill" style="width: ${(bookPct * 100).toFixed(1)}%; background: ${getProgressGradient(bookPct)};"></div>
+          </div>
+        </div>
+        <div class="book-stats">
+          <span>${book.pagesRead || 0} / ${book.estimatedPages ? '~' : ''}${book.totalPages ?? '???'} pages</span>
+          <span class="daily-target ${target ? '' : 'no-target'}">${target ? target + ' pg/day' : '—'}</span>
+        </div>
+        <div class="edit-fields">
+          <div class="edit-row">
+            <label>Title</label>
+            <input type="text" class="wide" value="${escapeAttr(book.title)}" data-field="title" data-idx="${index}">
+          </div>
+          <div class="edit-row">
+            <label>Author</label>
+            <input type="text" class="wide" value="${escapeAttr(book.author)}" data-field="author" data-idx="${index}">
+          </div>
+          <div class="edit-row">
+            <label>Pages Read</label>
+            <input type="number" value="${book.pagesRead || 0}" min="0" data-field="pagesRead" data-idx="${index}">
+          </div>
+          <div class="edit-row">
+            <label>Total Pages</label>
+            <input type="number" value="${book.totalPages ?? ''}" min="1" data-field="totalPages" data-idx="${index}">
+          </div>
+          <div class="edit-row">
+            <label>Difficulty</label>
+            <input type="number" value="${book.difficulty ?? ''}" min="1" max="10" data-field="difficulty" data-idx="${index}">
+          </div>
+          <button class="remove-book-btn" data-idx="${index}">✕ Remove</button>
+        </div>
+      `;
+
+      // Click to log (only in non-edit mode)
+      card.addEventListener('click', (e) => {
+        if (editMode) return;
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+        openLogModal(index);
+      });
+
+      wrapper.appendChild(card);
+      list.appendChild(wrapper);
+    }
+
+    // Edit fields change handlers
+    list.querySelectorAll('.edit-fields input').forEach(input => {
+      input.addEventListener('change', onEditField);
+    });
+
+    list.querySelectorAll('.remove-book-btn').forEach(btn => {
+      btn.addEventListener('click', onRemoveBook);
+    });
+
+    // Apply edit mode class
+    if (editMode) {
+      list.classList.add('edit-mode');
+    } else {
+      list.classList.remove('edit-mode');
+    }
+
+    // Footer stats
+    document.getElementById('stat-completed').textContent = `${completed}/${books.length}`;
+    document.getElementById('stat-pages').textContent = totalRead.toLocaleString();
+
+    // Average pages per day (from log)
+    const uniqueDays = new Set(readingLog.map(e => e.date));
+    const avgPages = uniqueDays.size > 0 ? Math.round(totalRead / uniqueDays.size) : 0;
+    document.getElementById('stat-avg').textContent = avgPages;
+
+    // Streak
+    document.getElementById('stat-streak').textContent = calculateStreak();
+
+    // Finish date check
+    const finishWrapper = document.getElementById('stat-finish-wrapper');
+    if (dailyTargetCheck) {
+      finishWrapper.classList.remove('hidden');
+      const fd = dailyTargetCheck.finishDate;
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const dateStr = `${months[fd.getMonth()]} ${fd.getDate()}`;
+      const el = document.getElementById('stat-finish');
+      el.textContent = dateStr;
+      // Color: green if before Dec 31, red if after
+      const deadline = new Date(2026, 11, 31);
+      el.style.color = fd <= deadline ? 'var(--green)' : 'var(--red)';
+    } else {
+      finishWrapper.classList.add('hidden');
+    }
+  }
+
+  function calculateStreak() {
+    if (readingLog.length === 0) return 0;
+    const dates = [...new Set(readingLog.map(e => e.date))].sort().reverse();
+    const today = getDateStr(new Date());
+    const yesterday = getDateStr(new Date(Date.now() - 86400000));
+
+    // Streak must include today or yesterday
+    if (dates[0] !== today && dates[0] !== yesterday) return 0;
+
+    let streak = 1;
+    for (let i = 1; i < dates.length; i++) {
+      const prev = new Date(dates[i - 1]);
+      const curr = new Date(dates[i]);
+      const diff = (prev - curr) / 86400000;
+      if (diff === 1) streak++;
+      else break;
+    }
+    return streak;
+  }
+
+  function getDateStr(d) {
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  }
+
+  // --- Log Modal ---
+  function openLogModal(bookIndex) {
+    const book = books[bookIndex];
+    if (!book) return;
+
+    const modal = document.getElementById('log-modal');
+    document.getElementById('modal-title').textContent = book.title;
+    document.getElementById('modal-author').textContent = book.author;
+    document.getElementById('modal-progress').textContent =
+      `Progress: ${book.pagesRead || 0} / ${book.totalPages ?? '???'} pages`;
+
+    modal.classList.remove('hidden');
+    modal.dataset.bookIndex = bookIndex;
+    document.getElementById('custom-pages').value = '';
+    playBeep(600, 0.05);
+  }
+
+  function closeLogModal() {
+    document.getElementById('log-modal').classList.add('hidden');
+  }
+
+  function logPages(bookIndex, pages) {
+    if (pages <= 0 || isNaN(pages)) return;
+    const book = books[bookIndex];
+    if (!book) return;
+
+    const oldPages = book.pagesRead || 0;
+    book.pagesRead = oldPages + pages;
+
+    // Cap at total if known
+    if (book.totalPages != null && book.pagesRead > book.totalPages) {
+      book.pagesRead = book.totalPages;
+    }
+
+    const wasComplete = oldPages >= (book.totalPages || Infinity);
+    const nowComplete = book.totalPages != null && book.pagesRead >= book.totalPages;
+
+    // Log entry
+    readingLog.push({
+      date: getDateStr(new Date()),
+      title: book.title,
+      pages: pages
+    });
+
+    saveBooks();
+    saveLog();
+
+    // Effects
+    if (nowComplete && !wasComplete) {
+      playLevelUp();
+      showLevelUp(book.title);
+    } else {
+      playBeep(1000, 0.06);
+    }
+    showSparkles();
+
+    closeLogModal();
+    render();
+  }
+
+  function showSparkles() {
+    const container = document.createElement('div');
+    container.className = 'sparkle-container';
+    container.style.left = (window.innerWidth / 2 - 50) + 'px';
+    container.style.top = (window.innerHeight / 2 - 50) + 'px';
+
+    const symbols = ['★', '✦', '✧', '◆', '♦'];
+    for (let i = 0; i < 8; i++) {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      s.style.left = (Math.random() * 100) + 'px';
+      s.style.top = (Math.random() * 100) + 'px';
+      s.style.color = ['var(--gold)', 'var(--green)', '#fff'][Math.floor(Math.random() * 3)];
+      s.style.animationDelay = (Math.random() * 0.3) + 's';
+      container.appendChild(s);
+    }
+
+    document.body.appendChild(container);
+    setTimeout(() => container.remove(), 1200);
+  }
+
+  function showLevelUp(title) {
+    const el = document.createElement('div');
+    el.className = 'levelup-text';
+    el.textContent = `★ BOOK COMPLETE! ★`;
+    el.style.left = '50%';
+    el.style.top = '40%';
+    el.style.transform = 'translateX(-50%)';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1500);
+  }
+
+  // --- Edit Mode ---
+  function toggleEditMode() {
+    editMode = !editMode;
+    document.getElementById('btn-edit').classList.toggle('active', editMode);
+    document.getElementById('btn-add-book').classList.toggle('hidden', !editMode);
+    document.getElementById('btn-save').classList.toggle('hidden', !editMode);
+    if (!editMode) {
+      document.getElementById('add-book-section').classList.remove('visible');
+    }
+    render();
+    playBeep(editMode ? 700 : 500, 0.06);
+  }
+
+  function onEditField(e) {
+    const idx = parseInt(e.target.dataset.idx);
+    const field = e.target.dataset.field;
+    let val = e.target.value;
+
+    if (field === 'pagesRead' || field === 'totalPages' || field === 'difficulty') {
+      val = val === '' ? null : parseInt(val);
+      if (val !== null && isNaN(val)) return;
+    }
+
+    books[idx][field] = val;
+    if (field === 'totalPages' && val != null) {
+      delete books[idx].estimatedPages;
+    }
+    saveBooks();
+    // Don't re-render to avoid losing focus, just update on save
+  }
+
+  function onRemoveBook(e) {
+    const idx = parseInt(e.target.dataset.idx);
+    if (!confirm(`Remove "${books[idx].title}"?`)) return;
+    books.splice(idx, 1);
+    // Rebuild order
+    bookOrder = books.map((_, i) => i);
+    saveBooks();
+    saveOrder();
+    render();
+  }
+
+  function openEditForBook(title) {
+    if (!editMode) toggleEditMode();
+    setTimeout(() => {
+      const cards = document.querySelectorAll('.book-card');
+      for (const card of cards) {
+        const idx = parseInt(card.dataset.bookIndex);
+        if (books[idx] && books[idx].title === title) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          card.style.outline = '3px solid var(--gold)';
+          setTimeout(() => card.style.outline = '', 2000);
+          break;
+        }
+      }
+    }, 100);
+  }
+
+  // --- Order Mode ---
+  let orderDragSrc = null;
+
+  function openOrderMode() {
+    const overlay = document.getElementById('order-overlay');
+    overlay.classList.remove('hidden');
+    renderOrderList();
+    playBeep(700, 0.06);
+  }
+
+  function closeOrderMode() {
+    document.getElementById('order-overlay').classList.add('hidden');
+    saveOrder();
+    render();
+    playBeep(500, 0.06);
+  }
+
+  function renderOrderList() {
+    const list = document.getElementById('order-list');
+    list.innerHTML = '';
+
+    let queueNum = 1;
+    for (let oi = 0; oi < bookOrder.length; oi++) {
+      const bi = bookOrder[oi];
+      const book = books[bi];
+      const isComplete = book.totalPages != null && book.pagesRead >= book.totalPages;
+      const pct = book.totalPages ? Math.round((book.pagesRead / book.totalPages) * 100) : 0;
+
+      const item = document.createElement('div');
+      item.className = 'order-item' + (isComplete ? ' completed' : '');
+      item.draggable = true;
+      item.dataset.orderIndex = oi;
+
+      const num = isComplete ? '✓' : queueNum;
+      const isCurrent = !isComplete && queueNum === 1;
+      if (!isComplete) queueNum++;
+
+      item.innerHTML = `
+        <span class="order-handle">⠿</span>
+        <span class="order-num ${isCurrent ? 'current' : ''}">${num}</span>
+        <span class="order-title">${escapeHtml(book.title)}</span>
+        <span class="order-pct">${isComplete ? 'done' : pct + '%'}</span>
+      `;
+
+      item.addEventListener('dragstart', (e) => {
+        orderDragSrc = oi;
+        item.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      item.addEventListener('dragend', () => {
+        item.classList.remove('dragging');
+        list.querySelectorAll('.order-item').forEach(el => el.classList.remove('drag-over'));
+      });
+
+      item.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        list.querySelectorAll('.order-item').forEach(el => el.classList.remove('drag-over'));
+        item.classList.add('drag-over');
+      });
+
+      item.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const dropIndex = parseInt(item.dataset.orderIndex);
+        if (orderDragSrc !== null && orderDragSrc !== dropIndex) {
+          const moved = bookOrder.splice(orderDragSrc, 1)[0];
+          bookOrder.splice(dropIndex, 0, moved);
+          saveOrder();
+          renderOrderList();
+          playBeep(600, 0.04);
+        }
+        orderDragSrc = null;
+      });
+
+      // Touch support
+      let touchStartY = 0;
+      item.addEventListener('touchstart', (e) => {
+        orderDragSrc = oi;
+        touchStartY = e.touches[0].clientY;
+        item.classList.add('dragging');
+      }, { passive: true });
+
+      item.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+      }, { passive: false });
+
+      item.addEventListener('touchend', (e) => {
+        item.classList.remove('dragging');
+        const endY = e.changedTouches[0].clientY;
+        const items = [...list.querySelectorAll('.order-item')];
+        let dropIdx = orderDragSrc;
+        for (let i = 0; i < items.length; i++) {
+          const rect = items[i].getBoundingClientRect();
+          if (endY >= rect.top && endY <= rect.bottom) {
+            dropIdx = i;
+            break;
+          }
+        }
+        if (orderDragSrc !== null && orderDragSrc !== dropIdx) {
+          const moved = bookOrder.splice(orderDragSrc, 1)[0];
+          bookOrder.splice(dropIdx, 0, moved);
+          saveOrder();
+          renderOrderList();
+          playBeep(600, 0.04);
+        }
+        orderDragSrc = null;
+      });
+
+      list.appendChild(item);
+    }
+  }
+
+  function addBook() {
+    const title = document.getElementById('new-title').value.trim();
+    const author = document.getElementById('new-author').value.trim();
+    const pages = document.getElementById('new-pages').value;
+    const diff = document.getElementById('new-difficulty').value;
+
+    if (!title) return;
+
+    books.push({
+      title,
+      author: author || 'Unknown',
+      pagesRead: 0,
+      totalPages: pages ? parseInt(pages) : null,
+      difficulty: diff ? parseInt(diff) : null
+    });
+
+    bookOrder.push(books.length - 1);
+    saveBooks();
+    saveOrder();
+
+    // Clear form
+    document.getElementById('new-title').value = '';
+    document.getElementById('new-author').value = '';
+    document.getElementById('new-pages').value = '';
+    document.getElementById('new-difficulty').value = '';
+
+    playBeep(900, 0.08);
+    render();
+  }
+
+  // --- Reroll ---
+  function reroll() {
+    const btn = document.getElementById('btn-reroll');
+    const icon = btn.textContent.charAt(0);
+    btn.innerHTML = `<span class="reroll-spin">↻</span> Calculating...`;
+    playBeep(400, 0.1);
+
+    setTimeout(() => {
+      calculateTargets();
+      render();
+      btn.innerHTML = `↻ Calculate Targets`;
+      playBeep(800, 0.1);
+    }, 500);
+  }
+
+  // --- Sound ---
+  function updateSoundButton() {
+    document.getElementById('btn-sound').textContent = soundEnabled ? '♪ ON' : '♪ OFF';
+  }
+
+  function toggleSound() {
+    soundEnabled = !soundEnabled;
+    localStorage.setItem(LS_SOUND, JSON.stringify(soundEnabled));
+    updateSoundButton();
+    if (soundEnabled) playBeep(800, 0.06);
+  }
+
+  // --- Utilities ---
+  function escapeHtml(s) {
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  function escapeAttr(s) {
+    return s.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  // --- Event Listeners ---
+  document.getElementById('btn-reroll').addEventListener('click', reroll);
+  document.getElementById('btn-order').addEventListener('click', openOrderMode);
+  document.getElementById('btn-order-done').addEventListener('click', closeOrderMode);
+  document.getElementById('btn-edit').addEventListener('click', toggleEditMode);
+  document.getElementById('btn-save').addEventListener('click', () => {
+    // Collect all edit field values (they save on change, but re-save + re-render)
+    document.querySelectorAll('.edit-fields input').forEach(input => {
+      const idx = parseInt(input.dataset.idx);
+      const field = input.dataset.field;
+      let val = input.value;
+      if (field === 'pagesRead' || field === 'totalPages' || field === 'difficulty') {
+        val = val === '' ? null : parseInt(val);
+      }
+      if (books[idx]) books[idx][field] = val;
+    });
+    saveBooks();
+    toggleEditMode();
+  });
+  document.getElementById('btn-add-book').addEventListener('click', () => {
+    document.getElementById('add-book-section').classList.toggle('visible');
+  });
+  document.getElementById('btn-confirm-add').addEventListener('click', addBook);
+  document.getElementById('btn-sound').addEventListener('click', toggleSound);
+  document.getElementById('btn-fix-estimates').addEventListener('click', () => {
+    const estimated = books.filter(b => b.estimatedPages);
+    if (estimated.length > 0) openEditForBook(estimated[0].title);
+  });
+
+  // Sync
+  document.getElementById('sync-indicator').addEventListener('click', openSyncSetup);
+  document.getElementById('btn-sync-save').addEventListener('click', saveSyncConfig);
+  document.getElementById('btn-sync-cancel').addEventListener('click', closeSyncSetup);
+  document.getElementById('btn-sync-clear').addEventListener('click', clearSyncConfig);
+  document.getElementById('sync-modal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeSyncSetup();
+  });
+
+  // Log modal
+  document.getElementById('modal-close').addEventListener('click', closeLogModal);
+  document.getElementById('log-modal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeLogModal();
+  });
+
+  document.querySelectorAll('.quick-add-buttons button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(document.getElementById('log-modal').dataset.bookIndex);
+      const pages = parseInt(btn.dataset.pages);
+      logPages(idx, pages);
+    });
+  });
+
+  document.getElementById('btn-custom-add').addEventListener('click', () => {
+    const idx = parseInt(document.getElementById('log-modal').dataset.bookIndex);
+    const pages = parseInt(document.getElementById('custom-pages').value);
+    if (pages > 0) logPages(idx, pages);
+  });
+
+  document.getElementById('custom-pages').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      document.getElementById('btn-custom-add').click();
+    }
+  });
+
+  // Keyboard shortcut: Escape to close modal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLogModal();
+  });
+
+  // --- Start ---
+  init();
+})();
+</script>
+</body>
+</html>
