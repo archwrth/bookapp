@@ -1,0 +1,155 @@
+{
+  "books": [
+    {
+      "title": "Nausea",
+      "author": "Jean-Paul Sartre",
+      "pagesRead": 54,
+      "totalPages": 138,
+      "difficulty": 6
+    },
+    {
+      "title": "The Soundscape",
+      "author": "R. Murray Schafer",
+      "pagesRead": 18,
+      "totalPages": 264,
+      "difficulty": 7
+    },
+    {
+      "title": "Psychotherapy East & West",
+      "author": "Alan W. Watts",
+      "pagesRead": 59,
+      "totalPages": 205,
+      "difficulty": 7
+    },
+    {
+      "title": "Ghosts of My Life",
+      "author": "Mark Fisher",
+      "pagesRead": 49,
+      "totalPages": 267,
+      "difficulty": 6
+    },
+    {
+      "title": "The Birth of Tragedy",
+      "author": "Friedrich Nietzsche",
+      "pagesRead": 4,
+      "totalPages": 142,
+      "difficulty": 9
+    },
+    {
+      "title": "Fear and Trembling",
+      "author": "Søren Kierkegaard",
+      "pagesRead": 0,
+      "totalPages": 141,
+      "difficulty": 8
+    },
+    {
+      "title": "Wherever You Go, There You Are",
+      "author": "Jon Kabat-Zinn",
+      "pagesRead": 0,
+      "totalPages": 299,
+      "difficulty": 3
+    },
+    {
+      "title": "Oneness vs The 1%",
+      "author": "Vandana Shiva",
+      "pagesRead": 0,
+      "totalPages": 173,
+      "difficulty": 5
+    },
+    {
+      "title": "The Patterning Instinct",
+      "author": "Jeremy Lent",
+      "pagesRead": 160,
+      "totalPages": 430,
+      "difficulty": 6
+    },
+    {
+      "title": "The Name of the Rose",
+      "author": "Umberto Eco",
+      "pagesRead": 0,
+      "totalPages": 576,
+      "difficulty": 7
+    },
+    {
+      "title": "Caliban and the Witch",
+      "author": "Silvia Federici",
+      "pagesRead": 0,
+      "totalPages": 268,
+      "difficulty": 7
+    },
+    {
+      "title": "Lolita",
+      "author": "Vladimir Nabokov",
+      "pagesRead": 0,
+      "totalPages": 317,
+      "difficulty": 6,
+      "estimatedPages": true
+    },
+    {
+      "title": "She Comes First",
+      "author": "Ian Kerner",
+      "pagesRead": 0,
+      "totalPages": 205,
+      "difficulty": 2
+    },
+    {
+      "title": "The Mountains Sing",
+      "author": "Nguyễn Phan Quế Mai",
+      "pagesRead": 0,
+      "totalPages": 342,
+      "difficulty": 4
+    },
+    {
+      "title": "9 Out of 10 Climbers Make the Same Mistakes",
+      "author": "Dave MacLeod",
+      "pagesRead": 0,
+      "totalPages": 164,
+      "difficulty": 3
+    },
+    {
+      "title": "Eichmann in Jerusalem",
+      "author": "Hannah Arendt",
+      "pagesRead": 0,
+      "totalPages": 312,
+      "difficulty": 7,
+      "estimatedPages": true
+    },
+    {
+      "title": "Down and Out in Paris and London",
+      "author": "George Orwell",
+      "pagesRead": 0,
+      "totalPages": 228,
+      "difficulty": 3,
+      "estimatedPages": true
+    },
+    {
+      "title": "The Fire Next Time",
+      "author": "James Baldwin",
+      "pagesRead": 0,
+      "totalPages": 106,
+      "difficulty": 4,
+      "estimatedPages": true
+    }
+  ],
+  "bookOrder": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "readingLog": []
+}
