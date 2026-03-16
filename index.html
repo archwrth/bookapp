@@ -2379,11 +2379,12 @@ footer h2 {
     if (todayEntries.length === 0) return;
     if (!confirm(`Undo ${todayEntries.length} log entries from today?`)) return;
 
-    // Subtract today's pages from each book
+    // Subtract today's pages from each book, never going below baseline
     for (const entry of todayEntries) {
       const book = books.find(b => b.title === entry.title);
       if (book) {
-        book.pagesRead = Math.max(0, (book.pagesRead || 0) - entry.pages);
+        const floor = targetBaseline[book.title] ?? 0;
+        book.pagesRead = Math.max(floor, (book.pagesRead || 0) - entry.pages);
       }
     }
 
