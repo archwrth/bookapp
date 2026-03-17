@@ -2049,9 +2049,10 @@ footer h2 {
     document.getElementById('stat-completed').textContent = `${completed}/${books.length}`;
     document.getElementById('stat-pages').textContent = totalRead.toLocaleString();
 
-    // Average pages per day (from log)
+    // Average pages per day (only pages actually logged, not baseline)
     const uniqueDays = new Set(readingLog.map(e => e.date));
-    const avgPages = uniqueDays.size > 0 ? Math.round(totalRead / uniqueDays.size) : 0;
+    const pagesLogged = readingLog.reduce((s, e) => s + e.pages, 0);
+    const avgPages = uniqueDays.size > 0 ? Math.round(pagesLogged / uniqueDays.size) : 0;
     document.getElementById('stat-avg').textContent = avgPages;
 
     // Streak
