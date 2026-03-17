@@ -1785,11 +1785,10 @@ footer h2 {
     scheduleSyncToGitHub();
   }
 
-  // How far ahead/behind schedule (linear from first reading day → Dec 31)
+  // How far ahead/behind schedule (linear from TARGET_START → Dec 31)
   function getScheduleDelta() {
     const totalPages = books.reduce((s, b) => s + (b.totalPages || 0), 0);
     if (totalPages === 0) return null;
-    if (readingLog.length === 0) return { delta: 0, expectedByNow: 0, totalRead: 0 };
 
     const totalRead = books.reduce((s, b) => s + (b.pagesRead || 0), 0);
     const today = new Date();
@@ -1797,22 +1796,24 @@ footer h2 {
 
     // Pages logged = total progress made via the log (not pre-existing)
     const pagesLogged = readingLog.reduce((s, e) => s + e.pages, 0);
-    // Pages remaining at the point logging started
-    const pagesAtStart = totalRead - pagesLogged;
-    const remainingAtStart = totalPages - pagesAtStart;
+    // Baseline pages (what existed before logging started)
+    const baselineTotal = Object.values(DEFAULT_BASELINE).reduce((s, v) => s + v, 0);
+    const remainingAtStart = totalPages - baselineTotal;
 
-    // Start date = first log entry
-    const sortedDates = readingLog.map(e => e.date).sort();
-    const startDate = new Date(sortedDates[0] + 'T00:00:00');
+    // Always use TARGET_START so the schedule delta reflects the plan,
+    // even before any reading has been logged.
+    const startDate = new Date(TARGET_START);
+    startDate.setHours(0, 0, 0, 0);
     const totalDays = Math.ceil((DEADLINE - startDate) / 86400000);
-    const elapsed = Math.max(0, Math.ceil((today - startDate) / 86400000));
+    // +1 so the current day's target is included (day 1 = today)
+    const elapsed = Math.max(0, Math.ceil((today - startDate) / 86400000) + 1);
     if (totalDays <= 0 || remainingAtStart <= 0) return null;
 
     // Expected logged pages by now (linear over remaining pages from start)
     const expectedLogged = Math.round((elapsed / totalDays) * remainingAtStart);
     const delta = pagesLogged - expectedLogged;
 
-    return { delta, expectedByNow: pagesAtStart + expectedLogged, totalRead };
+    return { delta, expectedByNow: baselineTotal + expectedLogged, totalRead };
   }
 
   // --- Rendering ---
