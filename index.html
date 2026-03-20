@@ -1285,7 +1285,7 @@ footer h2 {
   // Hardcoded baseline: the pagesRead each book had as of Mar 17.
   // This is the absolute floor — resetToday and baseline init always use these.
   const DEFAULT_BASELINE = {
-    "Nausea": 26,
+    "Nausea": 0,
     "The Soundscape": 14,
     "Psychotherapy East & West": 55,
     "Ghosts of My Life": 17,
@@ -1794,10 +1794,12 @@ footer h2 {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    // Pages logged = total progress made via the log (not pre-existing)
-    const pagesLogged = readingLog.reduce((s, e) => s + e.pages, 0);
-    // Baseline pages (what existed before logging started)
-    const baselineTotal = Object.values(DEFAULT_BASELINE).reduce((s, v) => s + v, 0);
+    // Use targetBaseline (actual stored baseline, updated on edits) rather than
+    // DEFAULT_BASELINE, so edits to pagesRead are reflected correctly.
+    const baselineTotal = Object.values(targetBaseline).reduce((s, v) => s + v, 0);
+    // Derive progress from current book state, not the reading log,
+    // since log entries can become stale after pagesRead edits.
+    const pagesLogged = totalRead - baselineTotal;
     const remainingAtStart = totalPages - baselineTotal;
 
     // Always use TARGET_START so the schedule delta reflects the plan,
