@@ -1785,36 +1785,40 @@ footer h2 {
     scheduleSyncToGitHub();
   }
 
-  // How far ahead/behind schedule (linear from TARGET_START → Dec 31)
+  // How far ahead/behind schedule based on per-book daily targets
   function getScheduleDelta() {
     const totalPages = books.reduce((s, b) => s + (b.totalPages || 0), 0);
     if (totalPages === 0) return null;
 
     const totalRead = books.reduce((s, b) => s + (b.pagesRead || 0), 0);
+    const baselineTotal = Object.values(targetBaseline).reduce((s, v) => s + v, 0);
+    const pagesLogged = totalRead - baselineTotal;
+
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
-    // Use targetBaseline (actual stored baseline, updated on edits) rather than
-    // DEFAULT_BASELINE, so edits to pagesRead are reflected correctly.
-    const baselineTotal = Object.values(targetBaseline).reduce((s, v) => s + v, 0);
-    // Derive progress from current book state, not the reading log,
-    // since log entries can become stale after pagesRead edits.
-    const pagesLogged = totalRead - baselineTotal;
-    const remainingAtStart = totalPages - baselineTotal;
-
-    // Always use TARGET_START so the schedule delta reflects the plan,
-    // even before any reading has been logged.
     const startDate = new Date(TARGET_START);
     startDate.setHours(0, 0, 0, 0);
-    // +1 on both so day 1 = start date and the last day maps to 100%
-    const totalDays = Math.ceil((DEADLINE - startDate) / 86400000) + 1;
     const elapsed = Math.max(0, Math.ceil((today - startDate) / 86400000) + 1);
-    if (totalDays <= 0 || remainingAtStart <= 0) return null;
 
-    // Floor so you're not penalised for a fractional page
-    const expectedLogged = Math.floor((elapsed / totalDays) * remainingAtStart);
+    // Walk books in reading order: each book's daily target × days on that book
+    let expectedLogged = 0;
+    let dayUsed = 0;
+    for (const i of bookOrder) {
+      const book = books[i];
+      if (book.totalPages == null) continue;
+      const baseline = targetBaseline[book.title] ?? 0;
+      const remaining = book.totalPages - baseline;
+      if (remaining <= 0) continue;
+      const target = dailyTargets[book.title] || 1;
+      const daysForBook = Math.ceil(remaining / target);
+      const daysAvailable = Math.max(0, elapsed - dayUsed);
+      const daysOnBook = Math.min(daysForBook, daysAvailable);
+      expectedLogged += Math.min(remaining, target * daysOnBook);
+      dayUsed += daysForBook;
+      if (dayUsed >= elapsed) break;
+    }
+
     const delta = pagesLogged - expectedLogged;
-
     return { delta, expectedByNow: baselineTotal + expectedLogged, totalRead };
   }
 
