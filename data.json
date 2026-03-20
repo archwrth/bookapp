@@ -3,7 +3,7 @@
     {
       "title": "Nausea",
       "author": "Jean-Paul Sartre",
-      "pagesRead": 45,
+      "pagesRead": 60,
       "totalPages": 178,
       "difficulty": 6
     },
@@ -186,6 +186,16 @@
       "date": "2026-03-20",
       "title": "Nausea",
       "pages": 15
+    },
+    {
+      "date": "2026-03-20",
+      "title": "Nausea",
+      "pages": 10
+    },
+    {
+      "date": "2026-03-20",
+      "title": "Nausea",
+      "pages": 5
     }
   ],
   "dailyTargets": {
