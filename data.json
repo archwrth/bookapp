@@ -109,7 +109,7 @@
     {
       "title": "Eichmann in Jerusalem",
       "author": "Hannah Arendt",
-      "pagesRead": 150,
+      "pagesRead": 157,
       "totalPages": 312,
       "difficulty": 7,
       "estimatedPages": true
@@ -266,6 +266,16 @@
       "date": "2026-04-22",
       "title": "Eichmann in Jerusalem",
       "pages": 25
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Eichmann in Jerusalem",
+      "pages": 5
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Eichmann in Jerusalem",
+      "pages": 2
     }
   ],
   "dailyTargets": {
