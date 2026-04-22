@@ -3,7 +3,7 @@
     {
       "title": "Nausea",
       "author": "Jean-Paul Sartre",
-      "pagesRead": 103,
+      "pagesRead": 178,
       "totalPages": 178,
       "difficulty": 6
     },
@@ -109,7 +109,7 @@
     {
       "title": "Eichmann in Jerusalem",
       "author": "Hannah Arendt",
-      "pagesRead": 0,
+      "pagesRead": 25,
       "totalPages": 312,
       "difficulty": 7,
       "estimatedPages": true
@@ -226,6 +226,21 @@
       "date": "2026-03-26",
       "title": "Nausea",
       "pages": 1
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Nausea",
+      "pages": 50
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Nausea",
+      "pages": 25
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Eichmann in Jerusalem",
+      "pages": 25
     }
   ],
   "dailyTargets": {
