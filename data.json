@@ -95,7 +95,7 @@
     {
       "title": "The Mountains Sing",
       "author": "Nguyễn Phan Quế Mai",
-      "pagesRead": 0,
+      "pagesRead": 21,
       "totalPages": 342,
       "difficulty": 4
     },
@@ -109,7 +109,7 @@
     {
       "title": "Eichmann in Jerusalem",
       "author": "Hannah Arendt",
-      "pagesRead": 157,
+      "pagesRead": 297,
       "totalPages": 297,
       "difficulty": 7
     },
@@ -275,6 +275,71 @@
       "date": "2026-04-22",
       "title": "Eichmann in Jerusalem",
       "pages": 2
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 13
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 13
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 13
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 13
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 13
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 13
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 13
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 13
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 13
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 13
+    },
+    {
+      "date": "2026-05-05",
+      "title": "Eichmann in Jerusalem",
+      "pages": 10
+    },
+    {
+      "date": "2026-05-05",
+      "title": "The Mountains Sing",
+      "pages": 3
+    },
+    {
+      "date": "2026-05-05",
+      "title": "The Mountains Sing",
+      "pages": 18
     }
   ],
   "dailyTargets": {
